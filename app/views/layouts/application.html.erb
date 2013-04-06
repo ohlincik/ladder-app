@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Ladder</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
+<%= render 'layouts/head' %>
 <body>
-
-<%= yield %>
-
+	<%= render 'layouts/toolbar' %>
+	<div class="container">
+		<%= render 'layouts/notice_alert' %>
+		<%= yield %>
+	</div>
 </body>
 </html>

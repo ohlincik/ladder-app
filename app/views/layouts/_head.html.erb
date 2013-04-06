@@ -1,0 +1,14 @@
+<head>
+  <meta charset="utf-8">
+  <title><%= yield(:title) %> - Ladder</title>
+  <meta name="description" content="<%= yield(:description) %>">
+  <meta name="keywords" content="">
+  <meta name="author" content="Oto Hlincik (oto@me.com)">
+  <%= stylesheet_link_tag    "application", media: 'all' %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <%= yield(:head) %>
+</head>
