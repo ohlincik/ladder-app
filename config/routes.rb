@@ -3,6 +3,7 @@ Ladder::Application.routes.draw do
   devise_for :players
 
   root to: "pages#home"
+  match 'rules' => 'pages#rules'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

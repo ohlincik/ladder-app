@@ -1,1 +1,18 @@
-<h1>Welcome to LECOM Ladder!</h1>
+<% content_for :title do %>
+	Welcome
+<% end %>
+
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2 hero-unit">
+			<h2>Welcome to LECOM Ladder!</h2>
+			<p>The LECOM Ladder is an on-going friendly competition among the racquetball players that are members in good standing at the LECOM Medical Fitness &amp; Wellness Center. Players of <strong>all ages</strong>, <strong>any gender</strong> and <strong>all skill levels</strong> are welcome to participate.</p>
+			<p>To begin your participation, simply review the <a href="/rules">ladder rules</a> and <%= link_to "sign up", new_player_registration_path %>.</p>
+			<hr class="bs-docs-separator">
+			<a href="/rules"><button class="btn btn-large btn-primary" type="button">Ladder Rules</button></a>
+			<%= link_to new_player_registration_path do %>
+				<button class="btn btn-large btn-success" type="button">Sign up</button>
+			<% end %>
+		</div><!-- /span -->
+	</div><!-- /row -->
+</div> <!-- /container -->
