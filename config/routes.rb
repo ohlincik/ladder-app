@@ -1,9 +1,17 @@
 Ladder::Application.routes.draw do
 
+  root to: "pages#home"
   devise_for :players
 
-  root to: "pages#home"
-  match 'rules' => 'pages#rules'
+  # Resources
+  resources :players, only: [:show]
+
+  # Custom dynamic routes
+  match 'players/challenge/:id' => 'players#challenge', :as => :challenge, :via => :get
+
+  # Static Pages
+  match 'rules' => 'pages#rules', :via => :get
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
