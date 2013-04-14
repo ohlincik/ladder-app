@@ -1,0 +1,8 @@
+<% if player.id == current_player.id %>
+	<tr class="info">
+<% else %>
+	<tr>
+<% end %>
+		<td><%= player.rank %></td>
+		<td><%= "#{player.first_name} #{player.last_name}" %></td>
+	</tr>

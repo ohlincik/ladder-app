@@ -4,7 +4,7 @@ Ladder::Application.routes.draw do
   devise_for :players
 
   # Resources
-  resources :players, only: [ :show ]
+  resources :players, only: [ :show, :index ]
   resources :matches, only: [ :new, :create, :edit, :update ]
 
   # Static Pages
