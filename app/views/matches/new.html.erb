@@ -1,0 +1,14 @@
+<h3>You are challenging <%= "#{@challenged_player.first_name} #{@challenged_player.last_name}" %></h3>
+
+<%= bootstrap_form_for @match do |f| %>
+	
+	<%= f.hidden_field(:challenger_id) %>
+	<%= f.hidden_field(:challenged_player_id) %>
+	
+	<%= f.date_select :scheduled_for %>
+
+	<%= f.actions do %>
+    <%= f.primary 'Submit Challenge', disable_with: 'Challenging...' %>
+  <% end %>
+<% end %>
+

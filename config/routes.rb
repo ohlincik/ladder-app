@@ -4,10 +4,8 @@ Ladder::Application.routes.draw do
   devise_for :players
 
   # Resources
-  resources :players, only: [:show]
-
-  # Custom dynamic routes
-  match 'players/challenge/:id' => 'players#challenge', :as => :challenge, :via => :get
+  resources :players, only: [ :show ]
+  resources :matches, only: [ :new, :create, :edit, :update ]
 
   # Static Pages
   match 'rules' => 'pages#rules', :via => :get

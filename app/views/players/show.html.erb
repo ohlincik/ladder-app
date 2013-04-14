@@ -5,13 +5,13 @@
 <div class="row">
 	<div class="span2 offset2">
 		<div class="rank-badge">
-			<p class="rank"><%= @player.rank %></p>
+			<p class="rank"><%= current_player.rank %></p>
 			<p>CURRENT RANK</p>
 		</div>
 	</div>
 	<div class="span6">
-		<h2><%= "#{@player.first_name} #{@player.last_name}" %></h2>
-		<h5>Competing since <%= @player.created_at.to_date.to_formatted_s(:long) %></h5>
+		<h2><%= "#{current_player.first_name} #{current_player.last_name}" %></h2>
+		<h5>Competing since <%= current_player.created_at.to_date.to_formatted_s(:long) %></h5>
 		
 		<table class="table table-hover">
 			<thead>
@@ -26,10 +26,14 @@
 				<tr>
 					<td><%= p.rank %></td>
 					<td><%= "#{p.first_name} #{p.last_name}" %></td>
-					<% if p.id == @player.id %>
+					<% if p.id == current_player.id %>
 						<td>You</td>
+					<% elsif p.id == @challenged_player_id %>
+						<td><%= link_to "Pending challenge: #{@current_challenge_date.to_formatted_s(:long)}", edit_match_path(@current_challenge_id) %></td>
+					<% elsif @current_challenge %>
+						<td>Sorry, current challenge</td>
 					<% else %>
-						<td><%= link_to "challenge", challenge_path(p.id) %></td>
+						<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
 					<% end %>
 				</tr>
 			<% end %>

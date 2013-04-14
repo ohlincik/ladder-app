@@ -1,0 +1,35 @@
+<%= bootstrap_form_for @match do |f| %>
+	
+	<%= f.date_select :played_at %>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+				<th><%= "#{@match.challenger.first_name} #{@match.challenger.last_name}" %></th>
+				<th><%= "#{@match.challenged_player.first_name} #{@match.challenged_player.last_name}" %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>GAME 1</td>
+				<td><%= f.select(:challenger_set1, @match_set, label: :none) %></td>
+				<td><%= f.select(:challenged_player_set1, @match_set, label: :none) %></td>
+			</tr>
+			<tr>
+				<td>GAME 2</td>
+				<td><%= f.select(:challenger_set2, @match_set, label: :none) %></td>
+				<td><%= f.select(:challenged_player_set2, @match_set, label: :none) %></td>
+			</tr>
+			<tr>
+				<td>GAME 3</td>
+				<td><%= f.select(:challenger_set3, @match_set, label: :none) %></td>
+				<td><%= f.select(:challenged_player_set3, @match_set, label: :none) %></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<%= f.actions do %>
+    <%= f.primary 'Edit Challenge', disable_with: 'Working...' %>
+  <% end %>
+<% end %>
