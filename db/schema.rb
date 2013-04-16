@@ -11,22 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413142537) do
+ActiveRecord::Schema.define(:version => 20130414162439) do
 
   create_table "matches", :force => true do |t|
     t.integer  "challenger_id"
     t.integer  "challenged_player_id"
     t.datetime "scheduled_for"
     t.datetime "played_at"
-    t.integer  "challenger_set1"
-    t.integer  "challenged_player_set1"
-    t.integer  "challenger_set2"
-    t.integer  "challenged_player_set2"
-    t.integer  "challenger_set3"
-    t.integer  "challenged_player_set3"
+    t.integer  "challenger_game1"
+    t.integer  "challenged_player_game1"
+    t.integer  "challenger_game2"
+    t.integer  "challenged_player_game2"
+    t.integer  "challenger_game3"
+    t.integer  "challenged_player_game3"
     t.integer  "winner"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   add_index "matches", ["challenged_player_id"], :name => "index_matches_on_challenged_player_id"

@@ -13,18 +13,18 @@
 		<tbody>
 			<tr>
 				<td>GAME 1</td>
-				<td><%= f.select(:challenger_set1, @match_set, label: :none) %></td>
-				<td><%= f.select(:challenged_player_set1, @match_set, label: :none) %></td>
+				<td><%= f.select(:challenger_game1, @match_score, label: :none) %></td>
+				<td><%= f.select(:challenged_player_game1, @match_score, label: :none) %></td>
 			</tr>
 			<tr>
 				<td>GAME 2</td>
-				<td><%= f.select(:challenger_set2, @match_set, label: :none) %></td>
-				<td><%= f.select(:challenged_player_set2, @match_set, label: :none) %></td>
+				<td><%= f.select(:challenger_game2, @match_score, label: :none) %></td>
+				<td><%= f.select(:challenged_player_game2, @match_score, label: :none) %></td>
 			</tr>
 			<tr>
 				<td>GAME 3</td>
-				<td><%= f.select(:challenger_set3, @match_set, label: :none) %></td>
-				<td><%= f.select(:challenged_player_set3, @match_set, label: :none) %></td>
+				<td><%= f.select(:challenger_game3, @match_score, label: :none) %></td>
+				<td><%= f.select(:challenged_player_game3, @match_score, label: :none) %></td>
 			</tr>
 		</tbody>
 	</table>
