@@ -30,6 +30,7 @@
 	</table>
 
 	<%= f.actions do %>
-    <%= f.primary 'Edit Challenge', disable_with: 'Working...' %>
+    <%= f.primary 'Submit Match Results', disable_with: 'Working...' %>
+    <%= link_to 'Cancel and Go Back', player_path(current_player), :class => 'btn' %>
   <% end %>
 <% end %>

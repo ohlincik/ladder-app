@@ -21,6 +21,7 @@ class MatchesController < ApplicationController
 
 	def edit
 		@match = Match.find(params[:id])
+		@match.played_at = @match.scheduled_for
 		@match_score = (0..15).to_a
 	end
 
@@ -28,20 +29,17 @@ class MatchesController < ApplicationController
 		@match = Match.find(params[:id])
 		@match_score = (0..15).to_a
 
-		# Determine if the score was input properly
-		challenger_game1 = params[:challenger_game1]
-		challenger_game2 = params[:challenger_game2]
-		challenger_game3 = params[:challenger_game3]
-		challenged_player_game1 = params[:challenged_player_game1]
-		challenged_player_game2 = params[:challenged_player_game2]
-		challenged_player_game3 = params[:challenged_player_game3]
+		# Update the match attributes with the data from edit form
+		@match.attributes = params[:match]
+
+		### Determine if the score was input properly
 
 		# Check game 1
-		if (challenger_game1.to_i == 15) && (challenged_player_game1.to_i < 15)
+		if (@match.challenger_game1.to_i == 15) && (@match.challenged_player_game1.to_i < 15)
 			# GOOD - Challenger won the game
 			score = 10
 
-		elsif (challenger_game1.to_i < 15) && (challenged_player_game1.to_i == 15)
+		elsif (@match.challenger_game1.to_i < 15) && (@match.challenged_player_game1.to_i == 15)
 			# GOOD - Challenged player won the game
 			score = 1
 
@@ -52,11 +50,11 @@ class MatchesController < ApplicationController
 		end
 
 		# Check game 2
-		if (challenger_game2.to_i == 15) && (challenged_player_game2.to_i < 15)
+		if (@match.challenger_game2.to_i == 15) && (@match.challenged_player_game2.to_i < 15)
 			# GOOD - Challenger won the game
 			score = score + 10
 
-		elsif (challenger_game2.to_i < 15) && (challenged_player_game2.to_i == 15)
+		elsif (@match.challenger_game2.to_i < 15) && (@match.challenged_player_game2.to_i == 15)
 			# GOOD - Challenged player won the game
 			score = score + 1
 
@@ -69,12 +67,26 @@ class MatchesController < ApplicationController
 		# Check if game 3 was necessary
 		if score == 11
 			# Match tied, need game 3 to decide
-			if (challenger_game3.to_i == 15) && (challenged_player_game3.to_i < 15)
+			if (@match.challenger_game3.to_i == 15) && (@match.challenged_player_game3.to_i < 15)
 				# GOOD - Challenger won the game and match
-				
-			elsif (challenger_game3.to_i < 15) && (challenged_player_game3.to_i == 15)
+				@match.winner = @match.challenger_id
+
+				if current_player.id == @match.winner
+					flash.notice = "CONGRATS! You won the challenge match. Your new rank is #{@match.challenged_player.rank}"
+					#------ Player.adjust_ranks(current_player, @match.challenged_player)
+				else
+					flash.notice = "The challenger #{@match.challenger.first_name} #{@match.challenger.last_name} won the match. Your new rank is #{@match.challenged_player.rank.to_i + 1}"
+				end
+			elsif (@match.challenger_game3.to_i < 15) && (@match.challenged_player_game3.to_i == 15)
 				# GOOD - Challenged player won the game and match
-				
+				# Challenged player won the match
+				@match.winner = @match.challenged_player_id
+
+				if current_player.id == @match.winner
+					flash.notice = "CONGRATS! You won the challnge match. Your rank is safe (for now... ;-)"
+				else
+					flash.notice = "The challenged player #{@match.challenged_player.first_name} #{@match.challenged_player.last_name} won the match. Your rank has not changed."
+				end
 			else
 				# BAD - the score is incorrect
 				flash.alert = "Please correct the score for GAME 3."
@@ -83,15 +95,30 @@ class MatchesController < ApplicationController
 		else
 			if score == 20
 				# Challenger won the match
-				flash.notice = "The challenger #{@match.challenger.first_name} #{@match.challenger.last_name} won."
+				@match.winner = @match.challenger_id
+
+				if current_player.id == @match.winner
+					flash.notice = "CONGRATS! You won the challenge match. Your new rank is #{@match.challenged_player.rank}"
+					#----- Player.adjust_ranks(current_player, @match.challenged_player)
+				else
+					flash.notice = "The challenger #{@match.challenger.first_name} #{@match.challenger.last_name} won the match. Your new rank is #{@match.challenged_player.rank.to_i + 1}"
+				end
+				
 			else
 				# Challenged player won the match
-				flash.notice = "The challenged player #{@match.challenged_player.first_name} #{@match.challenged_player.last_name} won."
+				@match.winner = @match.challenged_player_id
+
+				if current_player.id == @match.winner
+					flash.notice = "CONGRATS! You won the challnge match. Your rank is safe (for now... ;-)"
+				else
+					flash.notice = "The challenged player #{@match.challenged_player.first_name} #{@match.challenged_player.last_name} won the match. Your rank has not changed."
+				end
 			end
 		end
 
 		#if @match.update_attributes(params[:match])
-			redirect_to player_path(current_player)
+			render :action => "edit"
+			#redirect_to player_path(current_player)
 		#else
 		#	render :action => "edit"
 		#end

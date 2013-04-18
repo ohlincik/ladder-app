@@ -12,32 +12,55 @@
 	<div class="span6">
 		<h2><%= "#{current_player.first_name} #{current_player.last_name}" %></h2>
 		<h5>Competing since <%= current_player.created_at.to_date.to_formatted_s(:long) %></h5>
-		
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Rank</th>
-					<th>Player</th>
-					<th>&nbsp;</th>
-				</tr>
-			</thead>
-			<tbody>
-			<% @players.each do |p| %>
-				<tr>
-					<td><%= p.rank %></td>
-					<td><%= "#{p.first_name} #{p.last_name}" %></td>
-					<% if p.id == current_player.id %>
-						<td>You</td>
-					<% elsif p.id == @challenged_player_id %>
-						<td><%= link_to "Pending challenge: #{@current_challenge_date.to_formatted_s(:long)}", edit_match_path(@current_challenge_id) %></td>
-					<% elsif @current_challenge %>
-						<td>Sorry, current challenge</td>
-					<% else %>
-						<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
-					<% end %>
-				</tr>
-			<% end %>
-			</tbody>
-		</table>
+		<hr>
+
+		<% if @current_challenge_pending %>
+			<div class="row">
+				<div class="span4 offset1">
+					<div class="challenge-badge text-center">
+						<h4>Pending challenge from</h4>
+						<h3><%= "#{@challenger_name}" %></h3>
+						<h5>Scheduled for <%= "#{@current_challenge_date.to_formatted_s(:long)}" %></h5>
+						<hr>
+						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge_id), :class =>'btn' %></p>
+					</div>
+				</div>
+			</div>
+		<% elsif @current_challenge_issued %>
+			<div class="row">
+				<div class="span4 offset1">
+					<div class="challenge-badge text-center">
+						<h4>You challenged</h4>
+						<h3><%= "#{@challenged_player_name}" %></h3>
+						<h5>Scheduled for <%= "#{@current_challenge_date.to_formatted_s(:long)}" %></h5>
+						<hr>
+						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge_id), :class =>'btn' %></p>
+					</div>
+				</div>
+			</div>
+		<% else %>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Rank</th>
+						<th>Player</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @players.each do |p| %>
+					<tr>
+						<td><%= p.rank %></td>
+						<td><%= "#{p.first_name} #{p.last_name}" %></td>
+						<% if p.id == current_player.id %>
+							<td>You</td>
+						<% else %>
+							<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
+						<% end %>
+					</tr>
+				<% end %>
+				</tbody>
+			</table>
+		<% end %>
 	</div>
 </div>
