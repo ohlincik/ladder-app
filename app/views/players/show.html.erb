@@ -14,27 +14,27 @@
 		<h5>Competing since <%= current_player.created_at.to_date.to_formatted_s(:long) %></h5>
 		<hr>
 
-		<% if @current_challenge_pending %>
+		<% if @current_challenge.challenge_pending? %>
 			<div class="row">
 				<div class="span4 offset1">
 					<div class="challenge-badge text-center">
 						<h4>Pending challenge from</h4>
-						<h3><%= "#{@challenger_name}" %></h3>
-						<h5>Scheduled for <%= "#{@current_challenge_date.to_formatted_s(:long)}" %></h5>
+						<h3><%= @current_challenge.challenger_name %></h3>
+						<h5>Scheduled for <%= @current_challenge.date.to_formatted_s(:long) %></h5>
 						<hr>
-						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge_id), :class =>'btn' %></p>
+						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge.id), :class =>'btn' %></p>
 					</div>
 				</div>
 			</div>
-		<% elsif @current_challenge_issued %>
+		<% elsif @current_challenge.challenge? %>
 			<div class="row">
 				<div class="span4 offset1">
 					<div class="challenge-badge text-center">
 						<h4>You challenged</h4>
-						<h3><%= "#{@challenged_player_name}" %></h3>
-						<h5>Scheduled for <%= "#{@current_challenge_date.to_formatted_s(:long)}" %></h5>
+						<h3><%= @current_challenge.challenged_player_name %></h3>
+						<h5>Scheduled for <%= @current_challenge.date.to_formatted_s(:long) %></h5>
 						<hr>
-						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge_id), :class =>'btn' %></p>
+						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge.id), :class =>'btn' %></p>
 					</div>
 				</div>
 			</div>

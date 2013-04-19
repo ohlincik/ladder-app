@@ -18,6 +18,26 @@ class Player < ActiveRecord::Base
   attr_accessible :rank, :first_name, :last_name, :phone, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
+  def any_challenges?
+    !self.challenges.empty?
+  end
+
+  def challenge_issued?
+    if self.any_challenges?
+      self.challenges.last.played_at.nil?
+    end
+  end
+
+  def any_challenge_matches?
+    !self.challenge_matches.empty?
+  end
+
+  def challenge_match_pending?
+    if self.any_challenge_matches?
+      self.challenge_matches.last.played_at.nil?
+    end
+  end
+
   def adjust_ranks challenged_player
     # select players from challenged_player's rank to challenger's rank
     players = Player.where("rank >= ? AND rank <= ?", challenged_player.rank, self.rank)
