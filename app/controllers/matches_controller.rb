@@ -73,7 +73,7 @@ class MatchesController < ApplicationController
 
 				if current_player.id == @match.winner
 					flash.notice = "CONGRATS! You won the challenge match. Your new rank is #{@match.challenged_player.rank}"
-					#------ Player.adjust_ranks(current_player, @match.challenged_player)
+					current_player.adjust_ranks(@match.challenged_player)
 				else
 					flash.notice = "The challenger #{@match.challenger.first_name} #{@match.challenger.last_name} won the match. Your new rank is #{@match.challenged_player.rank.to_i + 1}"
 				end
@@ -99,7 +99,7 @@ class MatchesController < ApplicationController
 
 				if current_player.id == @match.winner
 					flash.notice = "CONGRATS! You won the challenge match. Your new rank is #{@match.challenged_player.rank}"
-					#----- Player.adjust_ranks(current_player, @match.challenged_player)
+					current_player.adjust_ranks(@match.challenged_player)
 				else
 					flash.notice = "The challenger #{@match.challenger.first_name} #{@match.challenger.last_name} won the match. Your new rank is #{@match.challenged_player.rank.to_i + 1}"
 				end
@@ -109,19 +109,18 @@ class MatchesController < ApplicationController
 				@match.winner = @match.challenged_player_id
 
 				if current_player.id == @match.winner
-					flash.notice = "CONGRATS! You won the challnge match. Your rank is safe (for now... ;-)"
+					flash.notice = "CONGRATS! You won the challenge match. Your rank is safe (for now... ;-)"
 				else
 					flash.notice = "The challenged player #{@match.challenged_player.first_name} #{@match.challenged_player.last_name} won the match. Your rank has not changed."
 				end
 			end
 		end
 
-		#if @match.update_attributes(params[:match])
+		if @match.save
+			redirect_to player_path(current_player)
+		else
 			render :action => "edit"
-			#redirect_to player_path(current_player)
-		#else
-		#	render :action => "edit"
-		#end
+		end
 	end
 
 end
