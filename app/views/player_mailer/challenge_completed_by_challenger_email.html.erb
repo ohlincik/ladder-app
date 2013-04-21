@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Your Challenge Match score is in...</h1>
+    <p>
+      The challenger, <%= "#{@match.challenger.first_name} #{@match.challenger.last_name}" %>, has submitted the score for your challenge match played on <%= @match.played_at.to_date.to_formatted_s(:long_ordinal) %>.
+    </p>
+    <% if @match.challenger.id == @match.winner %>
+      <p>The challenger won the match with the following scores:</p>
+      <p>
+        <%= @match.challenger_game1 %> : <%= @match.challenged_player_game1 %>,
+        <%= @match.challenger_game2 %> : <%= @match.challenged_player_game2 %>
+        <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
+          , <%= @match.challenger_game3 %> : <%= @match.challenged_player_game3 %>
+        <% end %>
+      </p>
+      <p><strong>Your new rank is <%= @match.challenged_player.rank.to_i + 1 %></strong></p>
+    <% else %>
+      <p>You won the match with the following scores:</p>
+      <p>
+        <%= @match.challenged_player_game1 %> : <%= @match.challenger_game1 %>,
+        <%= @match.challenged_player_game2 %> : <%= @match.challenger_game2 %>
+        <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
+          , <%= @match.challenged_player_game3 %> : <%= @match.challenger_game3 %>
+        <% end %>
+      </p>
+      <p>Your rank remains unchanged (for now... ;-)</p>
+    <% end %>
+    <br><br>
+    <p>Thanks for participating!</p>
+  </body>
+</html>

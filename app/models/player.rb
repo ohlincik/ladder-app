@@ -38,19 +38,19 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def adjust_ranks challenged_player
+  def adjust_ranks challenger, challenged_player
     # select players from challenged_player's rank to challenger's rank
-    players = Player.where("rank >= ? AND rank <= ?", challenged_player.rank, self.rank)
+    players = Player.where("rank >= ? AND rank <= ?", challenged_player.rank, challenger.rank)
 
     # increase ranks on all players
     players.each do |player|
-      player.rank = player.rank + 1
+      player.rank += 1
       player.save
     end
 
     # set the challenger's rank to stored challenged_player's rank
-    self.rank = challenged_player.rank
-    self.save
+    challenger.rank = challenged_player.rank
+    challenger.save
   end
 
 end

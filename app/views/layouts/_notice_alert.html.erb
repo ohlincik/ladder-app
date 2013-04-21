@@ -1,4 +1,7 @@
 <% if notice %>
+	<script>
+		window.setTimeout(function() { $(".alert-success").fadeOut(); }, 4000);
+	</script>
   <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <%= notice %>

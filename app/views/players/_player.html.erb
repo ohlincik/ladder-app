@@ -5,4 +5,16 @@
 <% end %>
 		<td><%= player.rank %></td>
 		<td><%= "#{player.first_name} #{player.last_name}" %></td>
+		<% if player.challenge_issued? %>
+			<td>
+				Issued challenge to <%= "#{player.challenges.last.challenged_player.first_name} #{player.challenges.last.challenged_player.last_name}" %>
+			</td>
+		<% elsif player.challenge_match_pending? %>
+			<td>
+				Challenged by <%= "#{player.challenge_matches.last.challenger.first_name} #{player.challenge_matches.last.challenger.last_name}" %>
+			</td>
+		<% else %>
+			<td>&nbsp;</td>
+		<% end %>
+		</td>
 	</tr>

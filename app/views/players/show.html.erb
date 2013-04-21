@@ -52,6 +52,14 @@
 						<td><%= "#{p.first_name} #{p.last_name}" %></td>
 						<% if p.id == current_player.id %>
 							<td>You</td>
+						<% elsif p.challenge_issued? %>
+							<td>
+								Issued challenge to <%= "#{p.challenges.last.challenged_player.first_name} #{p.challenges.last.challenged_player.last_name}" %>
+							</td>
+						<% elsif p.challenge_match_pending? %>
+							<td>
+								Challenged by <%= "#{p.challenge_matches.last.challenger.first_name} #{p.challenge_matches.last.challenger.last_name}" %>
+							</td>
 						<% else %>
 							<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
 						<% end %>

@@ -12,7 +12,7 @@ class MatchesController < ApplicationController
 		match = Match.new(params[:match])
 		if match.save
 			flash.notice = "Challenge match successfully scheduled."
-			PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message]).deliver
+			# PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message]).deliver
 			redirect_to player_path(current_player)
 		else
 			flash.alert = "Could not schedule the match."
@@ -33,10 +33,15 @@ class MatchesController < ApplicationController
 
 		if @match.score_valid?
 			flash.notice = @match.declare_winner(current_player)
-			if @match.challenger_victorious?
-				current_player.adjust_ranks(@match.challenged_player)
-			end
 			@match.save
+			if @match.challenger_victorious?
+				current_player.adjust_ranks(@match.challenger, @match.challenged_player)
+			end
+			if current_player == @match.challenger
+				PlayerMailer.challenge_completed_by_challenger_email(@match).deliver
+			else
+				PlayerMailer.challenge_completed_by_challenged_player_email(@match).deliver
+			end
 			redirect_to player_path(current_player)
 		else
 			flash.alert = @match.alert
