@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>You have been challenged by <%= "#{@challenger.first_name} #{@challenger.last_name}" %></h1>
+    <p>
+      <%= @message %>
+    </p>
+    <p>
+      Please communicate directly with the challenger. Here is the contact info:
+    </p>
+    <p><strong>Email:</strong> <%= @challenger.email %></p>  
+    <p><strong>Phone:</strong> <%= @challenger.phone %></p>
+    <br><br>
+    <p>Thanks for participating!</p>
+  </body>
+</html>

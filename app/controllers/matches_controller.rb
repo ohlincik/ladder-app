@@ -12,6 +12,7 @@ class MatchesController < ApplicationController
 		match = Match.new(params[:match])
 		if match.save
 			flash.notice = "Challenge match successfully scheduled."
+			PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message]).deliver
 			redirect_to player_path(current_player)
 		else
 			flash.alert = "Could not schedule the match."
@@ -21,7 +22,6 @@ class MatchesController < ApplicationController
 
 	def edit
 		@match = Match.find(params[:id])
-		@match.played_at = @match.scheduled_for
 		@match_score = (0..15).to_a
 	end
 
