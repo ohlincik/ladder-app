@@ -23,7 +23,4 @@ class Challenge
 		"#{@player.challenge_matches.last.challenger.first_name} #{@player.challenge_matches.last.challenger.last_name}"
 	end
 
-	def date
-		self.challenge? ? @player.challenges.last.scheduled_for.to_date : @player.challenge_matches.last.scheduled_for.to_date
-	end
 end

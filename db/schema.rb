@@ -11,12 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414162439) do
+ActiveRecord::Schema.define(:version => 20130420234658) do
 
   create_table "matches", :force => true do |t|
     t.integer  "challenger_id"
     t.integer  "challenged_player_id"
-    t.datetime "scheduled_for"
     t.datetime "played_at"
     t.integer  "challenger_game1"
     t.integer  "challenged_player_game1"

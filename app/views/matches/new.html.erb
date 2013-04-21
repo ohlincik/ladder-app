@@ -5,7 +5,7 @@
 	<%= f.hidden_field(:challenger_id) %>
 	<%= f.hidden_field(:challenged_player_id) %>
 	
-	<%= f.date_select :scheduled_for %>
+	<%= text_area_tag(:message, "", :size => "40x6", :class => "span6", :style => "background-color:#f8f8f8;", :placeholder => "Your message here...") %>
 
 	<%= f.actions do %>
     <%= f.primary 'Submit Challenge', disable_with: 'Challenging...' %>

@@ -20,7 +20,6 @@
 					<div class="challenge-badge text-center">
 						<h4>Pending challenge from</h4>
 						<h3><%= @current_challenge.challenger_name %></h3>
-						<h5>Scheduled for <%= @current_challenge.date.to_formatted_s(:long) %></h5>
 						<hr>
 						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge.id), :class =>'btn' %></p>
 					</div>
@@ -32,7 +31,6 @@
 					<div class="challenge-badge text-center">
 						<h4>You challenged</h4>
 						<h3><%= @current_challenge.challenged_player_name %></h3>
-						<h5>Scheduled for <%= @current_challenge.date.to_formatted_s(:long) %></h5>
 						<hr>
 						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge.id), :class =>'btn' %></p>
 					</div>
