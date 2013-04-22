@@ -38,7 +38,7 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def adjust_ranks challenger, challenged_player
+  def self.adjust_ranks challenger, challenged_player
     # select players from challenged_player's rank to challenger's rank
     players = Player.where("rank >= ? AND rank <= ?", challenged_player.rank, challenger.rank)
 

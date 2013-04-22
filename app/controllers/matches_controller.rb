@@ -35,7 +35,7 @@ class MatchesController < ApplicationController
 			flash.notice = @match.declare_winner(current_player)
 			@match.save
 			if @match.challenger_victorious?
-				current_player.adjust_ranks(@match.challenger, @match.challenged_player)
+				Player.adjust_ranks(@match.challenger, @match.challenged_player)
 			end
 			if current_player == @match.challenger
 				PlayerMailer.challenge_completed_by_challenger_email(@match).deliver
