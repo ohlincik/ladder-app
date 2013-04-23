@@ -38,6 +38,11 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def self.within_challenge_range player
+    challenge_gap = Ladder::Application.config.challenge_gap
+    where("rank > ?", player.rank - challenge_gap.to_i).limit(challenge_gap.to_i)    
+  end  
+
   def self.adjust_ranks challenger, challenged_player
     # select players from challenged_player's rank to challenger's rank
     players = Player.where("rank >= ? AND rank <= ?", challenged_player.rank, challenger.rank)

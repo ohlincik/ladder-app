@@ -39,6 +39,16 @@ module Ladder
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # DEPLOYMENT SPECIFIC CONSTANTS
+    # Set the number of ranks that players can challenge
+    config.challenge_gap = 3
+
+    # Set re-challenge time delay in days that is imposed on challenger if he loses a challenge match
+    config.re_challenge_time_delay = 7
+
+    # Set the challenge inactivity in days that results in lowering the player's rank
+    config.challenge_inactivity = 14
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

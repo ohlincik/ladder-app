@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
 			@current_challenge = Challenge.new(current_player)
 		else
 			@current_challenge = Challenge.new(current_player)
-			@players = Player.where("rank > ?", current_player.rank-3).limit(3)
+			@players = Player.within_challenge_range(current_player)
 		end
 	end
 
