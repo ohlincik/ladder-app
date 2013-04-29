@@ -8,7 +8,7 @@ Ladder::Application.routes.draw do
   resources :matches, only: [ :new, :create, :edit, :update ]
 
   # Static Pages
-  match 'rules' => 'pages#rules', :via => :get
+  get 'rules' => 'pages#rules'
   
 
   # The priority is based upon order of creation:
