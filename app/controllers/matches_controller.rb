@@ -36,6 +36,8 @@ class MatchesController < ApplicationController
 			@match.save
 			if @match.challenger_victorious?
 				Player.adjust_ranks(@match.challenger, @match.challenged_player)
+			elsif @match.initial_challenges_complete?
+				@match.challenger.add_to_bottom_of_ladder
 			end
 			if current_player == @match.challenger
 				PlayerMailer.challenge_completed_by_challenger_email(@match).deliver

@@ -66,4 +66,8 @@ class Match < ActiveRecord::Base
   def challenger_victorious?
   	self.winner == self.challenger_id
   end
+
+  def initial_challenges_complete?
+  	self.challenger.rank.to_i == 0 and self.challenger.challenges.size > 1
+  end
 end

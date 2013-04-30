@@ -5,10 +5,17 @@
 <div class="row">
 	<div class="span2 offset2">
 		<div class="rank-badge">
-			<p class="rank">
-				<%= current_player.rank %>
-				<p>CURRENT RANK</p>
-			</p>
+			<% if current_player.rank.to_i > 0 %>
+				<p class="rank">
+					<%= current_player.rank %>
+					<p>CURRENT RANK</p>
+				</p>
+			<% else %>
+				<p class="no-rank">
+					new<br>
+					player
+				</p>
+			<% end %>
 		</div>
 	</div>
 	<div class="span6">
@@ -38,15 +45,6 @@
 					</div>
 				</div>
 			</div>
-		<% elsif current_player.rank.to_i == 1 %>
-			<div class="row">
-				<div class="span4 offset1">
-					<div class="top-of-ladder-badge text-center">
-						<h4>You are at the top of the ladder!</h4>
-						<p>CONGRATS! Now you have to wait for other players to challenge you.</p>
-					</div>
-				</div>
-			</div>
 		<% else %>
 			<table class="table table-hover">
 				<thead>
@@ -61,9 +59,7 @@
 					<tr>
 						<td><%= p.rank %></td>
 						<td><%= "#{p.first_name} #{p.last_name}" %></td>
-						<% if p.id == current_player.id %>
-							<td>You</td>
-						<% elsif p.challenge_issued? %>
+						<% if p.challenge_issued? %>
 							<td>
 								Issued challenge to <%= "#{p.challenges.last.challenged_player.first_name} #{p.challenges.last.challenged_player.last_name}" %>
 							</td>
@@ -71,8 +67,6 @@
 							<td>
 								Challenged by <%= "#{p.challenge_matches.last.challenger.first_name} #{p.challenge_matches.last.challenger.last_name}" %>
 							</td>
-						<% elsif current_player.rank.to_i < p.rank.to_i %>
-							<td>&nbsp;</td>
 						<% else %>
 							<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
 						<% end %>
