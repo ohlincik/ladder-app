@@ -46,6 +46,13 @@
 				</div>
 			</div>
 		<% else %>
+			<% if current_player.any_challenges? %>
+				<p>You have <strong>one more challenge remaining</strong> before your initial rank is established. If you lose the next challenge match, you will be placed on the bottom of the ladder.</p>
+			<% else %>
+				<p>You can challenge any player on the ladder 2 times before your initial rank is established. If you win your challenge match, you will assume the rank of the challenged player. If you lose the challenge match, you will get another chance to challenge. If you lose both your challenges, you will be placed at the bottom of the ladder.</p>
+			<% end %>
+			<p><strong>Good luck!</strong></p>
+			<hr>
 			<table class="table table-hover">
 				<thead>
 					<tr>

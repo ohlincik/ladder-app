@@ -1,5 +1,6 @@
 <div class="row">
-	<div class="span8 offset2">
+	<div class="span6 offset1">
+		<h2>Current Ladder Rankings</h2>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -11,5 +12,23 @@
 				<%= render @players %>
 			</tbody>
 		</table>
+	</div>
+	<div class="span3 offset1">
+		<h2>New Players</h2>
+		<% unless @new_players.empty? %>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Joined</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%= render partial: "/players/new_player", object: @new_players, as: "new_players" %>
+				</tbody>
+			</table>
+		<% else %>
+			<p class="no-records">Currently there are no new players that joined the ladder.</p>
+		<% end %>
 	</div>
 </div>
