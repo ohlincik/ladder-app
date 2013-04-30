@@ -73,6 +73,8 @@
 							</td>
 						<% elsif current_player.rank.to_i < p.rank.to_i %>
 							<td>&nbsp;</td>
+						<% elsif current_player.challenge_reissue_delay?(p) %>
+							<td>Challenge again in <%= distance_of_time_in_words(Date.current,current_player.challenge_reissue_date(p)) %></td>
 						<% else %>
 							<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
 						<% end %>

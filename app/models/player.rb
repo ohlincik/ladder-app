@@ -48,6 +48,24 @@ class Player < ActiveRecord::Base
     self.save
   end
 
+  def challenge_reissue_delay? player
+    if self.any_challenges?
+      re_challenge_time_delay = Ladder::Application.config.re_challenge_time_delay
+      last_challenge = self.challenges.find_last_by_challenged_player_id(player.id)
+      if last_challenge
+        if !last_challenge.challenger_victorious?
+          last_challenge.played_at.advance(days: re_challenge_time_delay) > Date.current
+        end
+      end
+    end
+  end
+
+  def challenge_reissue_date player
+    re_challenge_time_delay = Ladder::Application.config.re_challenge_time_delay
+    last_challenge = self.challenges.find_last_by_challenged_player_id(player.id)
+    last_challenge.played_at.advance(days: re_challenge_time_delay)
+  end
+
   def self.within_challenge_range player
     challenge_gap = Ladder::Application.config.challenge_gap
     where("rank > ?", player.rank - challenge_gap.to_i).limit(challenge_gap.to_i)    
