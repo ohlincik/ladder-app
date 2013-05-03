@@ -1,14 +1,16 @@
-<h3>You are challenging <%= "#{@challenged_player.first_name} #{@challenged_player.last_name}" %></h3>
-
-<%= bootstrap_form_for @match do |f| %>
-	
-	<%= f.hidden_field(:challenger_id) %>
-	<%= f.hidden_field(:challenged_player_id) %>
-	
-	<%= text_area_tag(:message, "", :size => "40x6", :class => "span6", :style => "background-color:#f8f8f8;", :placeholder => "Your message here...") %>
-
-	<%= f.actions do %>
-    <%= f.primary 'Submit Challenge', disable_with: 'Challenging...' %>
-  <% end %>
-<% end %>
-
+<div class="row">
+	<div class="span6 offset3">
+		<h3>You are challenging <%= "#{@challenged_player.first_name} #{@challenged_player.last_name}" %></h3>
+		<p>You are about to submit a challenge to <%= "#{@challenged_player.first_name} #{@challenged_player.last_name}" %>. Use the following text box to provide any instructions that will help to schedule the match.</p>
+		<%= bootstrap_form_for @match do |f| %>
+			<%= f.hidden_field(:challenger_id) %>
+			<%= f.hidden_field(:challenged_player_id) %>
+			<%= text_area_tag(:message, "", :size => "40x6", :class => "span6", :style => "background-color:#f8f8f8;", :placeholder => "Your message here...") %>
+			<p>When you <strong>Submit</strong> the challenge, <%= "#{@challenged_player.first_name}" %> will receive an email with your message, your email address and phone number. After you complete the challenge match, come back and submit the match score.</p>
+			<%= f.actions do %>
+		    <%= f.primary 'Submit Challenge', disable_with: 'Challenging...' %>
+		    <%= link_to 'Cancel and Go Back', player_path(current_player), :class => 'btn' %>
+		  <% end %>
+		<% end %>
+	</div>
+</div>

@@ -16,28 +16,8 @@
 		<h5>Competing since <%= current_player.created_at.to_date.to_formatted_s(:long) %></h5>
 		<hr>
 
-		<% if @current_challenge.challenge_pending? %>
-			<div class="row">
-				<div class="span4 offset1">
-					<div class="challenge-badge text-center">
-						<h4>Pending challenge from</h4>
-						<h3><%= @current_challenge.challenger_name %></h3>
-						<hr>
-						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge.id), :class =>'btn' %></p>
-					</div>
-				</div>
-			</div>
-		<% elsif @current_challenge.challenge? %>
-			<div class="row">
-				<div class="span4 offset1">
-					<div class="challenge-badge text-center">
-						<h4>You challenged</h4>
-						<h3><%= @current_challenge.challenged_player_name %></h3>
-						<hr>
-						<p class="text-center"><%= link_to "View", edit_match_path(@current_challenge.id), :class =>'btn' %></p>
-					</div>
-				</div>
-			</div>
+		<% if @current_challenge.challenge? or @current_challenge.challenge_pending? %>
+			<%= render partial: "/players/challenge_badge", object: @current_challenge, as: "current_challenge" %>
 		<% elsif current_player.rank.to_i == 1 %>
 			<div class="row">
 				<div class="span4 offset1">

@@ -1,36 +1,44 @@
-<%= bootstrap_form_for @match do |f| %>
-	
-	<%= f.date_select :played_at %>
+<div class="row">
+	<div class="span6 offset3">
 
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>&nbsp;</th>
-				<th><%= "#{@match.challenger.first_name} #{@match.challenger.last_name}" %></th>
-				<th><%= "#{@match.challenged_player.first_name} #{@match.challenged_player.last_name}" %></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>GAME 1</td>
-				<td><%= f.select(:challenger_game1, @match_score, label: :none) %></td>
-				<td><%= f.select(:challenged_player_game1, @match_score, label: :none) %></td>
-			</tr>
-			<tr>
-				<td>GAME 2</td>
-				<td><%= f.select(:challenger_game2, @match_score, label: :none) %></td>
-				<td><%= f.select(:challenged_player_game2, @match_score, label: :none) %></td>
-			</tr>
-			<tr>
-				<td>GAME 3</td>
-				<td><%= f.select(:challenger_game3, @match_score, label: :none) %></td>
-				<td><%= f.select(:challenged_player_game3, @match_score, label: :none) %></td>
-			</tr>
-		</tbody>
-	</table>
+		<h2>Match Results</h2>
+		<%= bootstrap_form_for @match do |f| %>
+			
+			<div class="inline-text">
+				<%= f.text_field :played_at %>
+			</div>
 
-	<%= f.actions do %>
-    <%= f.primary 'Submit Match Results', disable_with: 'Working...' %>
-    <%= link_to 'Cancel and Go Back', player_path(current_player), :class => 'btn' %>
-  <% end %>
-<% end %>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th><%= "#{@match.challenger.first_name} #{@match.challenger.last_name}" %></th>
+						<th><%= "#{@match.challenged_player.first_name} #{@match.challenged_player.last_name}" %></th>
+					</tr>
+				</thead>
+				<tbody class="score">
+					<tr>
+						<th>GAME 1</th>
+						<td><%= f.select(:challenger_game1, @match_score, label: :none, html: { class: "score" }) %></td>
+						<td><%= f.select(:challenged_player_game1, @match_score, label: :none) %></td>
+					</tr>
+					<tr>
+						<th>GAME 2</th>
+						<td><%= f.select(:challenger_game2, @match_score, label: :none) %></td>
+						<td><%= f.select(:challenged_player_game2, @match_score, label: :none) %></td>
+					</tr>
+					<tr>
+						<th>GAME 3</th>
+						<td><%= f.select(:challenger_game3, @match_score, label: :none) %></td>
+						<td><%= f.select(:challenged_player_game3, @match_score, label: :none) %></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<%= f.actions do %>
+		    <%= f.primary 'Submit Match Results', disable_with: 'Working...' %>
+		    <%= link_to 'Cancel and Go Back', player_path(current_player), :class => 'btn' %>
+		  <% end %>
+		<% end %>
+	</div>
+</div>

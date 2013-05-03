@@ -1,0 +1,40 @@
+<% content_for :head do %>
+	<script>
+		$(function(){
+			$('[rel=popover]').popover({
+				html : true,
+				placement : 'top',
+				content: function() {
+					return $('#contact-info-data').html();
+				}
+			});
+		});
+	</script>
+<% end %>
+
+<%
+	if current_challenge.challenge_pending?
+		heading = "Pending challenge from"
+		date_label = "issued on"
+	else
+		heading = "You challenged"
+		date_label = "on"
+	end
+%>
+
+	<div class="row">
+		<div class="span4 offset1">
+			<div class="challenge-badge text-center">
+				<h4><%= heading %></h4>
+				<h3><%= current_challenge.player_full_name %></h3>
+				<p><%= date_label %> <%= current_challenge.issued_on.to_date.to_s(:short_ordinal) %></p>
+				<a class="btn btn-mini" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><i class="icon-comment"></i></a>
+				<hr>
+				<p class="text-center"><%= link_to "Submit Score", edit_match_path(current_challenge.id), :class =>'btn' %></p>
+			</div>
+		</div>
+	</div>
+	<div id="contact-info-data" style="display:none">
+		<strong>Email:</strong> <a href="mailto:<%= current_challenge.contact_email %>"><%= current_challenge.contact_email %></a><br>
+		<strong>Phone:</strong> <%= current_challenge.contact_phone %>
+	</div>

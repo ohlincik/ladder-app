@@ -22,6 +22,7 @@ class MatchesController < ApplicationController
 
 	def edit
 		@match = Match.find(params[:id])
+		@match.played_at = Date.current
 		@match_score = (0..15).to_a
 	end
 
