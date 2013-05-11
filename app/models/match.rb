@@ -11,6 +11,19 @@ class Match < ActiveRecord::Base
   	:challenger_game1, :challenger_game2, :challenger_game3,
   	:played_at, :scheduled_for, :winner
 
+  def score_select
+  	(0..15).to_a
+  end
+
+  def played_at_valid?
+  	if played_at <= Date.current
+  		return true
+  	else
+  		self.alert = "The date when you played the match must be either today or in the past."
+  		return false
+  	end
+  end
+
   def score_valid?
 
 		if (challenger_game1.to_i == 15) && (challenged_player_game1.to_i < 15)

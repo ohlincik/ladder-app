@@ -1,11 +1,25 @@
+<% content_for :head do %>
+	<script>
+		$(function(){
+			$('#match_played_at_formatted').datepicker({
+					format: 'mm/dd/yyyy'
+				});
+
+			$('#match_played_at_formatted').onclick({
+				$('#match_played_at_formatted').datepicker('show');	
+			});
+		});
+	</script>
+<% end %>
+
 <div class="row">
 	<div class="span6 offset3">
 
 		<h2>Match Results</h2>
 		<%= bootstrap_form_for @match do |f| %>
 			
-			<div class="inline-text">
-				<%= f.text_field :played_at %>
+			<div class="date-select">
+				<%= f.date_select :played_at, class: 'span2' %>
 			</div>
 
 			<table class="table table-hover">
@@ -19,18 +33,18 @@
 				<tbody class="score">
 					<tr>
 						<th>GAME 1</th>
-						<td><%= f.select(:challenger_game1, @match_score, label: :none, html: { class: "score" }) %></td>
-						<td><%= f.select(:challenged_player_game1, @match_score, label: :none) %></td>
+						<td><%= f.select(:challenger_game1, @match.score_select, label: :none, html: { class: "score" }) %></td>
+						<td><%= f.select(:challenged_player_game1, @match.score_select, label: :none) %></td>
 					</tr>
 					<tr>
 						<th>GAME 2</th>
-						<td><%= f.select(:challenger_game2, @match_score, label: :none) %></td>
-						<td><%= f.select(:challenged_player_game2, @match_score, label: :none) %></td>
+						<td><%= f.select(:challenger_game2, @match.score_select, label: :none) %></td>
+						<td><%= f.select(:challenged_player_game2, @match.score_select, label: :none) %></td>
 					</tr>
 					<tr>
 						<th>GAME 3</th>
-						<td><%= f.select(:challenger_game3, @match_score, label: :none) %></td>
-						<td><%= f.select(:challenged_player_game3, @match_score, label: :none) %></td>
+						<td><%= f.select(:challenger_game3, @match.score_select, label: :none) %></td>
+						<td><%= f.select(:challenged_player_game3, @match.score_select, label: :none) %></td>
 					</tr>
 				</tbody>
 			</table>

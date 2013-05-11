@@ -23,29 +23,30 @@ class MatchesController < ApplicationController
 	def edit
 		@match = Match.find(params[:id])
 		@match.played_at = Date.current
-		@match_score = (0..15).to_a
 	end
 
 	def update
 		@match = Match.find(params[:id])
-		@match_score = (0..15).to_a
 
 		@match.attributes = params[:match]
 
-		if @match.score_valid?
+		if @match.played_at_valid? and @match.score_valid?
 			flash.notice = @match.declare_winner(current_player)
-			@match.save
-			if @match.challenger_victorious?
-				Player.adjust_ranks(@match.challenger, @match.challenged_player)
-			elsif @match.initial_challenges_complete?
-				@match.challenger.add_to_bottom_of_ladder
-			end
-			if current_player == @match.challenger
-				PlayerMailer.challenge_completed_by_challenger_email(@match).deliver
+			if @match.save
+				if @match.challenger_victorious?
+					Player.adjust_ranks(@match.challenger, @match.challenged_player)
+				elsif @match.initial_challenges_complete?
+					@match.challenger.add_to_bottom_of_ladder
+				end
+				if current_player == @match.challenger
+					PlayerMailer.challenge_completed_by_challenger_email(@match).deliver
+				else
+					PlayerMailer.challenge_completed_by_challenged_player_email(@match).deliver
+				end
+				redirect_to player_path(current_player)
 			else
-				PlayerMailer.challenge_completed_by_challenged_player_email(@match).deliver
+				render :action => "edit"
 			end
-			redirect_to player_path(current_player)
 		else
 			flash.alert = @match.alert
 			render :action => "edit"
