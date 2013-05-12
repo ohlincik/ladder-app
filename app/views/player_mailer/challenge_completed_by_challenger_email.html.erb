@@ -1,35 +1,62 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <h1>Your Challenge Match score is in...</h1>
-    <p>
-      The challenger, <%= "#{@match.challenger.first_name} #{@match.challenger.last_name}" %>, has submitted the score for your challenge match played on <%= @match.played_at.to_date.to_formatted_s(:long_ordinal) %>.
-    </p>
-    <% if @match.challenger.id == @match.winner %>
-      <p>The challenger won the match with the following scores:</p>
-      <p>
-        <%= @match.challenger_game1 %> : <%= @match.challenged_player_game1 %>,
-        <%= @match.challenger_game2 %> : <%= @match.challenged_player_game2 %>
+<h1 style="color:#202020; display:block; font-family:Arial; font-size:22px; font-weight:bold; line-height:100%; margin-top:0; margin-right:0; margin-bottom:10px; margin-left:0; text-align:left;">Your Challenge Match score is in...
+</h1>
+
+The challenger, <%= "#{@match.challenger.first_name} #{@match.challenger.last_name}" %>, has submitted the score for your challenge match played on <%= @match.played_at.to_date.to_formatted_s(:long_ordinal) %>.
+
+<br><br>
+
+<% if @match.challenger.id == @match.winner %>
+
+  The challenger won the match with the following scores:
+  
+  <center>
+    <table border="0" cellpadding="10" cellspacing="20">
+      <tr>
+        <td style="background-color:#eee;font-size:30px;font-weight:bold;padding:24px 14px;">
+          <%= @match.challenger_game1 %>:<%= @match.challenged_player_game1 %>
+        </td>
+        <td style="background-color:#eee;font-size:30px;font-weight:bold;padding:24px 14px;">
+          <%= @match.challenger_game2 %>:<%= @match.challenged_player_game2 %>
+        </td>
         <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
-          , <%= @match.challenger_game3 %> : <%= @match.challenged_player_game3 %>
+          <td style="background-color:#eee;font-size:30px;font-weight:bold;padding:24px 14px;">
+            <%= @match.challenger_game3 %>:<%= @match.challenged_player_game3 %>
+          </td>
         <% end %>
-      </p>
-      <p><strong>Your new rank is <%= @match.challenged_player.rank.to_i + 1 %></strong></p>
-    <% else %>
-      <p>You won the match with the following scores:</p>
-      <p>
-        <%= @match.challenged_player_game1 %> : <%= @match.challenger_game1 %>,
-        <%= @match.challenged_player_game2 %> : <%= @match.challenger_game2 %>
+      </tr>
+    </table>
+  </center>
+
+  <div style="padding:10px;text-align:center;background-color:#FCF8E3;font-size:20px;font-weight:bold;">
+    Your new rank is <%= @match.challenged_player.rank.to_i + 1 %>
+  </div>
+
+<% else %>
+      
+  You won the match with the following scores:
+
+  <center>
+    <table border="0" cellpadding="14" cellspacing="20">
+      <tr>
+        <td style="background-color:#eee;font-size:30px;font-weight:bold;padding:24px 14px;">
+          <%= @match.challenger_game1 %>:<%= @match.challenged_player_game1 %>
+        </td>
+        <td style="background-color:#eee;font-size:30px;font-weight:bold;padding:24px 14px;">
+          <%= @match.challenger_game2 %>:<%= @match.challenged_player_game2 %>
+        </td>
         <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
-          , <%= @match.challenged_player_game3 %> : <%= @match.challenger_game3 %>
+          <td style="background-color:#eee;font-size:30px;font-weight:bold;padding:24px 14px;">
+            <%= @match.challenger_game3 %>:<%= @match.challenged_player_game3 %>
+          </td>
         <% end %>
-      </p>
-      <p>Your rank remains unchanged (for now... ;-)</p>
-    <% end %>
-    <br><br>
-    <p>Thanks for participating!</p>
-  </body>
-</html>
+      </tr>
+    </table>
+  </center>
+  <br>
+  <strong>Your rank remains unchanged...</strong>
+  <br>
+  
+<% end %>
+
+<br>
+Thanks for participating!
