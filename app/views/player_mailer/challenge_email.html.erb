@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <h1>You have been challenged by <%= "#{@challenger.first_name} #{@challenger.last_name}" %></h1>
-    <p>
-      <%= @message %>
-    </p>
-    <p>
-      Please communicate directly with the challenger. Here is the contact info:
-    </p>
-    <p><strong>Email:</strong> <%= @challenger.email %></p>  
-    <p><strong>Phone:</strong> <%= @challenger.phone %></p>
-    <br><br>
-    <p>Thanks for participating!</p>
-  </body>
-</html>
+<h4 class="h4">You got challenged by <%= "#{@challenger.first_name} #{@challenger.last_name}" %>...</h4>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="560">
+  <tr>
+    <td style="padding:20px;background-color:#eee;">
+      <strong>A message from <%= @challenger.first_name %>:</strong>
+      <br>
+      <%= simple_format(@message) %>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+  Please communicate directly with the challenger using the following contact info:
+<br>
+  <strong>Email:</strong> <%= @challenger.email %>
+<br>
+  <strong>Phone:</strong> <%= @challenger.phone %>
+<br><br>
+You can also find the challenger's contact information when you login to our account on the <a href="http://lecomladder.com" target="_blank">LECOM Ladder website</a>.
+<br><br>
+Thanks for participating!

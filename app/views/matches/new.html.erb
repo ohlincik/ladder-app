@@ -8,7 +8,7 @@
 			<%= text_area_tag(:message, "", :size => "40x6", :class => "span6", :style => "background-color:#f8f8f8;", :placeholder => "Your message here...") %>
 			<p>When you <strong>Submit</strong> the challenge, <%= "#{@challenged_player.first_name}" %> will receive an email with your message, your email address and phone number. After you complete the challenge match, come back and submit the match score.</p>
 			<%= f.actions do %>
-		    <%= f.primary 'Submit Challenge', disable_with: 'Challenging...' %>
+		    <%= f.primary 'Submit Challenge', disable_with: 'Submitting Challenge...' %>
 		    <%= link_to 'Cancel and Go Back', player_path(current_player), :class => 'btn' %>
 		  <% end %>
 		<% end %>
