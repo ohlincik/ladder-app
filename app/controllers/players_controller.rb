@@ -1,5 +1,7 @@
 class PlayersController < ApplicationController
 
+	before_filter :authenticate_player!
+
 	def show
 		if current_player.new_player?
 			@current_challenge = Challenge.new(current_player)

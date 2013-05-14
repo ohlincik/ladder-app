@@ -1,5 +1,7 @@
 class MatchesController < ApplicationController
 
+	before_filter :authenticate_player!
+
 	def new
 		@challenger = current_player
 		@challenged_player = Player.find(params[:id])
