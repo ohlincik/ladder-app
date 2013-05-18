@@ -23,44 +23,50 @@
 		<h5>Competing since <%= current_player.created_at.to_date.to_s(:long) %></h5>
 		<hr>
 
-		<% if @current_challenge.challenge? %>
-			<%= render partial: "/players/challenge_badge", object: @current_challenge, as: "current_challenge" %>
-		<% else %>
-			<% if current_player.any_challenges? %>
-				<p>You have <strong>one more challenge remaining</strong> before your initial rank is established. If you lose the next challenge match, you will be placed on the bottom of the ladder.</p>
+		<% if @show_onboarding_message %>
+			<p>Thanks for signing up!</p>
+			<p>Currently we are still waiting for more players to get on board. You can see all the players that signed up so far on the <%= link_to 'ladder rankings', players_path %> page. If you know anyone that would like to participate and is not on the list, ask them to sign up.</p>
+			<p>As soon as we have enough players signed up, we are going to establish initial rankings and then the challenges can begin. We will send you an email when it's time to get the ladder going.</p>
+		<% else %>	
+			<% if @current_challenge.challenge? %>
+				<%= render partial: "/players/challenge_badge", object: @current_challenge, as: "current_challenge" %>
 			<% else %>
-				<p>You can challenge any player on the ladder 2 times before your initial rank is established. If you win your challenge match, you will assume the rank of the challenged player. If you lose the challenge match, you will get another chance to challenge. If you lose both your challenges, you will be placed at the bottom of the ladder.</p>
-			<% end %>
-			<p><strong>Good luck!</strong></p>
-			<hr>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Rank</th>
-						<th>Player</th>
-						<th>&nbsp;</th>
-					</tr>
-				</thead>
-				<tbody>
-				<% @players.each do |p| %>
-					<tr>
-						<td><%= p.rank %></td>
-						<td><%= "#{p.first_name} #{p.last_name}" %></td>
-						<% if p.challenge_issued? %>
-							<td>
-								Issued challenge to <%= "#{p.challenges.last.challenged_player.first_name} #{p.challenges.last.challenged_player.last_name}" %>
-							</td>
-						<% elsif p.challenge_match_pending? %>
-							<td>
-								Challenged by <%= "#{p.challenge_matches.last.challenger.first_name} #{p.challenge_matches.last.challenger.last_name}" %>
-							</td>
-						<% else %>
-							<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
-						<% end %>
-					</tr>
+				<% if current_player.any_challenges? %>
+					<p>You have <strong>one more challenge remaining</strong> before your initial rank is established. If you lose the next challenge match, you will be placed on the bottom of the ladder.</p>
+				<% else %>
+					<p>You can challenge any player on the ladder 2 times before your initial rank is established. If you win your challenge match, you will assume the rank of the challenged player. If you lose the challenge match, you will get another chance to challenge. If you lose both your challenges, you will be placed at the bottom of the ladder.</p>
 				<% end %>
-				</tbody>
-			</table>
+				<p><strong>Good luck!</strong></p>
+				<hr>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Rank</th>
+							<th>Player</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+					<% @players.each do |p| %>
+						<tr>
+							<td><%= p.rank %></td>
+							<td><%= "#{p.first_name} #{p.last_name}" %></td>
+							<% if p.challenge_issued? %>
+								<td>
+									Issued challenge to <%= "#{p.challenges.last.challenged_player.first_name} #{p.challenges.last.challenged_player.last_name}" %>
+								</td>
+							<% elsif p.challenge_match_pending? %>
+								<td>
+									Challenged by <%= "#{p.challenge_matches.last.challenger.first_name} #{p.challenge_matches.last.challenger.last_name}" %>
+								</td>
+							<% else %>
+								<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
+							<% end %>
+						</tr>
+					<% end %>
+					</tbody>
+				</table>
+			<% end %>
 		<% end %>
 	</div>
 </div>

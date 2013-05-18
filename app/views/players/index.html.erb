@@ -1,17 +1,24 @@
 <div class="row">
 	<div class="span6 offset1">
-		<h2>Current Ladder Rankings</h2>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Rank</th>
-					<th>Player</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%= render @players %>
-			</tbody>
-		</table>
+		<% if @show_onboarding_message %>
+			<h2>Building Initial Ladder</h2>
+			<hr>
+			<p>Currently we are still waiting for more players to get on board. You can see all the players that signed up so far on the right. If you know anyone that would like to participate and is not on the list, ask them to sign up.</p>
+			<p>As soon as we have enough players signed up, we are going to establish initial rankings and then the challenges can begin. We will send you an email when it's time to get the ladder going.</p>
+		<% else %>
+			<h2>Current Ladder Rankings</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Rank</th>
+						<th>Player</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%= render @players %>
+				</tbody>
+			</table>
+		<% end %>
 	</div>
 	<div class="span3 offset1">
 		<h2>New Players</h2>

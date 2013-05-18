@@ -18,6 +18,10 @@ class Player < ActiveRecord::Base
   attr_accessible :rank, :first_name, :last_name, :phone, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
+  def self.no_ranked_players?
+    where('rank > 0').size == 0    
+  end
+
   def new_player?
     rank.to_i == 0
   end
