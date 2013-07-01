@@ -7,14 +7,14 @@
 
 		<hr>
 
-		<%= bootstrap_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { method: :post, class: 'form-horizontal' }) do |f| %>
+		<%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { method: :post, class: 'form-horizontal' }) do |f| %>
 		  <%= devise_error_messages! %>
 
-		  <%= f.email_field :email, :autofocus => true %>
+		  <%= f.input :email, :autofocus => true %>
 
-		  <%= f.actions do %>
-		  	<%= f.primary "Resend", disable_with: 'Sending email...' %>
-		  <% end %>
+		  <div class="form-actions">
+		  	<%= f.button :submit, 'Resend', class: "btn-primary", disable_with: 'Sending email...' %>
+		  </div>
 		<% end %>
 
 		<%= render "devise/shared/links" %>

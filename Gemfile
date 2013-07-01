@@ -25,8 +25,8 @@ end
 gem 'jquery-rails', '2.1.4'
 # Twitter's Bootstrap, converted to Sass and ready to drop into Rails or Compass
 gem 'bootstrap-sass', '2.3.1.0'
-# rails form builder that makes it super easy to create beautiful-looking forms using Twitter Bootstrap 2.0
-gem 'bootstrap_form', '0.3.2'
+# Forms made easy
+gem 'simple_form', "~> 2.1.0"
 # TabsOnRails is a simple Rails plugin for creating tabs and navigation menus.
 #gem 'tabs_on_rails', '2.1.1'
 # provides the capabilities for sorting and reordering a number of objects in a list.
