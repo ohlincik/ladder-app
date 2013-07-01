@@ -33,18 +33,18 @@
 				<tbody class="score">
 					<tr>
 						<th>GAME 1</th>
-						<td><%= f.input :challenger_game1, collection: @match.score_select, label: false %></td>
-						<td><%= f.input :challenged_player_game1, collection: @match.score_select, label: false %></td>
+						<td><%= f.input :challenger_game1, collection: @match.score_select, label: false, selected: @match.challenger_game1 %></td>
+						<td><%= f.input :challenged_player_game1, collection: @match.score_select, label: false, selected: @match.challenged_player_game1 %></td>
 					</tr>
 					<tr>
 						<th>GAME 2</th>
-						<td><%= f.input :challenger_game2, collection: @match.score_select, label: false %></td>
-						<td><%= f.input :challenged_player_game2, collection: @match.score_select, label: false %></td>
+						<td><%= f.input :challenger_game2, collection: @match.score_select, label: false, selected: @match.challenger_game2 %></td>
+						<td><%= f.input :challenged_player_game2, collection: @match.score_select, label: false, selected: @match.challenged_player_game2 %></td>
 					</tr>
 					<tr>
 						<th>GAME 3</th>
-						<td><%= f.input :challenger_game3, collection: @match.score_select, label: false %></td>
-						<td><%= f.input :challenged_player_game3, collection: @match.score_select, label: false %></td>
+						<td><%= f.input :challenger_game3, collection: @match.score_select, label: false, selected: @match.challenger_game3 %></td>
+						<td><%= f.input :challenged_player_game3, collection: @match.score_select, label: false, selected: @match.challenged_player_game3 %></td>
 					</tr>
 				</tbody>
 			</table>

@@ -8,6 +8,8 @@ class MatchesController < ApplicationController
 		@match = Match.new
 		@match.challenger_id = @challenger.id
 		@match.challenged_player_id = @challenged_player.id
+		@match.challenger_game1 = @match.challenger_game2 = @match.challenger_game3 = 0
+		@match.challenged_player_game1 = @match.challenged_player_game2 = @match.challenged_player_game3 = 0
 	end
 
 	def create
