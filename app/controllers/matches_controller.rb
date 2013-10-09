@@ -57,4 +57,14 @@ class MatchesController < ApplicationController
 		end
 	end
 
+	def destroy
+		match = Match.find(params[:id])
+
+		PlayerMailer.challenge_canceled_email(match).deliver
+		match.destroy
+
+		flash.notice = "Challenge successfully canceled."
+		redirect_to player_path(current_player)
+	end
+
 end

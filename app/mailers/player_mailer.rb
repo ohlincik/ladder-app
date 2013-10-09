@@ -19,7 +19,7 @@ class PlayerMailer < ActionMailer::Base
       to: "#{match.challenged_player.first_name} #{match.challenged_player.last_name} <#{match.challenged_player.email}>",
       from: "#{match.challenger.first_name} #{match.challenger.last_name} <mailer@lecomladder.com>",
       reply_to: match.challenger.email,
-      subject: "Your challenge match scores have been submitted."
+      subject: "Your challenge match scores have been submitted"
     )
   end
 
@@ -29,7 +29,17 @@ class PlayerMailer < ActionMailer::Base
       to: "#{match.challenger.first_name} #{match.challenger.last_name} <#{match.challenger.email}>",
       from: "#{match.challenged_player.first_name} #{match.challenged_player.last_name} <mail@lecomladder.com>",
       reply_to: match.challenged_player.email,
-      subject: "Your challenge match scores have been submitted."
+      subject: "Your challenge match scores have been submitted"
+    )
+  end
+
+  def challenge_canceled_email(match)
+    @challenger_name = "#{match.challenger.first_name} #{match.challenger.last_name}"
+    mail(
+      to: "#{match.challenged_player.first_name} #{match.challenged_player.last_name} <#{match.challenged_player.email}>",
+      from: "#{match.challenger.first_name} #{match.challenger.last_name} <mailer@lecomladder.com>",
+      reply_to: match.challenger.email,
+      subject: "Your challenge match was canceled"
     )
   end
 end

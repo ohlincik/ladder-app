@@ -16,9 +16,11 @@
 	if current_challenge.challenge_pending?
 		heading = "Pending challenge from"
 		date_label = "issued on"
+		show_cancel_link = false
 	else
 		heading = "You challenged"
 		date_label = "on"
+		show_cancel_link = true
 	end
 %>
 
@@ -31,6 +33,9 @@
 				<a class="btn btn-mini" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><i class="icon-comment"></i></a>
 				<hr>
 				<p class="text-center"><%= link_to "Submit Score", edit_match_path(current_challenge.id), :class =>'btn' %></p>
+				<% if show_cancel_link %>
+					<p class="text-center"><%= link_to "Cancel Challenge", match_path(current_challenge.id), method: :delete, confirm: "Are you sure?" %></p>
+				<% end %>
 			</div>
 		</div>
 	</div>

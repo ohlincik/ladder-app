@@ -5,7 +5,7 @@ Ladder::Application.routes.draw do
 
   # Resources
   resources :players, only: [ :show, :index ]
-  resources :matches, only: [ :new, :create, :edit, :update ]
+  resources :matches, only: [ :new, :create, :edit, :update, :destroy ]
 
   # Static Pages
   get 'rules' => 'pages#rules'
