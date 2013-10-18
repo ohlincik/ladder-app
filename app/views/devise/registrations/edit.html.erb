@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="span8 offset2">
+  <div class="col-md-8 col-md-offset-2">
     <h2>Your Player Profile</h2>
 
-    <%= simple_form_for(resource, as: resource_name, :url => registration_path(resource_name), :html => { :method => :put }, help: :block) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, :url => registration_path(resource_name), :html => { :method => :put, role: 'form' }, help: :block) do |f| %>
       <%= devise_error_messages! %>
 
       <div class="row">
-        <div class="span4">
+        <div class="col-sm-6 col-md-6">
 
           <%= f.input :first_name %>
 
@@ -17,7 +17,8 @@
           <%= f.input :email %>
 
         </div>
-        <div class="span4">
+        <div class="visible-xs"><hr></div>
+        <div class="col-sm-6 col-md-6">
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -32,8 +33,8 @@
         </div>
       </div>
 
-      <div class="form-actions">
-        <%= f.button :submit, 'Update', disable_with: 'Updating...' %>
+      <div class="form-group">
+        <%= f.button :submit, 'Update', class: 'btn-primary', disable_with: 'Updating...' %>
       </div>
 
     <% end %>

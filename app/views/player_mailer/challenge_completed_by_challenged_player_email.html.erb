@@ -2,7 +2,7 @@
   Your Challenge Match score is in...
 </h1>
 
-The challenged player, <%= "#{@match.challenged_player.first_name} #{@match.challenged_player.last_name}" %>, has submitted the score for your challenge match played on <%= @match.played_at.to_date.to_formatted_s(:long_ordinal) %>.
+The challenged player, <%= @match.challenged_player.name %>, has submitted the score for your challenge match played on <%= @match.played_at.to_date.to_formatted_s(:long_ordinal) %>.
 
 <br><br>
 

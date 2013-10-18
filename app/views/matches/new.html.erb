@@ -1,13 +1,15 @@
 <div class="row">
-	<div class="span6 offset3">
-		<h3>You are challenging <%= "#{@challenged_player.first_name} #{@challenged_player.last_name}" %></h3>
-		<p>You are about to submit a challenge to <%= "#{@challenged_player.first_name} #{@challenged_player.last_name}" %>. Use the following text box to provide any instructions that will help to schedule the match.</p>
-		<%= simple_form_for @match do |f| %>
+	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+		<h3>You are challenging <%= @challenged_player.name %></h3>
+		<p>You are about to submit a challenge to <%= @challenged_player.name %>. Use the following text box to provide any instructions that will help to schedule the match.</p>
+		<%= simple_form_for(@match, html: { role: 'form' }) do |f| %>
 			<%= f.input :challenger_id, as: :hidden %>
 			<%= f.input :challenged_player_id, as: :hidden %>
-			<%= text_area_tag 'message', '', size: "40x6", class: "span6", style: "background-color:#f8f8f8;", placeholder: "Your message here..." %>
-			<p>When you <strong>Submit</strong> the challenge, <%= "#{@challenged_player.first_name}" %> will receive an email with your message, your email address and phone number. After you complete the challenge match, come back and submit the match score.</p>
-			<div class="form-actions">
+			<%= text_area_tag 'message', '', size: "40x6", class: "col-md-12 form-control", style: "background-color:#f8f8f8;", placeholder: "Your message here..." %>
+			<br>
+			<p>When you <strong>Submit</strong> the challenge, <%= @challenged_player.first_name %> will receive an email with your message, your email address and phone number. After you complete the challenge match, come back and submit the match score.</p>
+			<hr>
+			<div class="form-group">
 		    <%= f.button :submit, 'Submit Challenge', class: "btn-primary", disable_with: 'Submitting Challenge...' %>
 		    <%= link_to 'Cancel and Go Back', player_path(current_player), class: 'btn' %>
 		  </div>

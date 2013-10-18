@@ -18,6 +18,10 @@ class Player < ActiveRecord::Base
   attr_accessible :rank, :first_name, :last_name, :phone, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def self.no_ranked_players?
     where('rank > 0').size == 0    
   end
@@ -43,6 +47,14 @@ class Player < ActiveRecord::Base
   def challenge_match_pending?
     if self.any_challenge_matches?
       self.challenge_matches.last.played_at.nil?
+    end
+  end
+
+  def last_challenge
+    if challenge_issued?
+      challenges.last
+    else
+      challenge_matches.last
     end
   end
 

@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="span6 offset1">
+	<div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-1">
 		<% if @show_onboarding_message %>
 			<h2>Building Initial Ladder</h2>
 			<hr>
@@ -12,6 +12,8 @@
 					<tr>
 						<th>Rank</th>
 						<th>Player</th>
+						<th>&nbsp;</th>
+						<th>Active Challenges</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -20,7 +22,8 @@
 			</table>
 		<% end %>
 	</div>
-	<div class="span3 offset1">
+	<div class="visible-xs"><hr></div>
+	<div class="col-sm-4 col-md-4">
 		<h2>New Players</h2>
 		<% unless @new_players.empty? %>
 			<table class="table">

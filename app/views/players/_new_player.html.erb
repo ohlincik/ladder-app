@@ -4,7 +4,7 @@
 	<% else %>
 		<tr>
 	<% end %>
-		<td><%= "#{new_player.first_name} #{new_player.last_name}" %></td>
+		<td><%= new_player.name %></td>
 		<td><%= new_player.created_at.to_date.to_formatted_s(:short) %></td>
 	</tr>
 <% end %>

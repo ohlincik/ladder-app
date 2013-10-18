@@ -63,14 +63,14 @@ class Match < ActiveRecord::Base
 			if current_player.id == winner
 				notice = "CONGRATS! You won the challenge match. Your new rank is #{challenged_player.rank}"
 			else
-				notice = "The challenger #{challenger.first_name} #{challenger.last_name} won the match. Your new rank is #{challenged_player.rank.to_i + 1}"
+				notice = "The challenger #{challenger.name} won the match. Your new rank is #{challenged_player.rank.to_i + 1}"
 			end
 		else
 			self.winner = challenged_player_id
 			if current_player.id == winner
 				notice = "CONGRATS! You won the challnge match. Your rank is safe (for now... ;-)"
 			else
-				notice = "The challenged player #{challenged_player.first_name} #{challenged_player.last_name} won the match. Your rank has not changed."
+				notice = "The challenged player #{challenged_player.name} won the match. Your rank has not changed."
 			end
 		end
   	return notice

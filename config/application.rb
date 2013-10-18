@@ -77,5 +77,8 @@ module Ladder
 
     # Do not access the DB on load models when precompiling assets (if deploying Rails 3.1+ on Heroku)
     config.assets.initialize_on_precompile = false
+
+    # Add the fonts directory to get the Bootstrap 3 glyphicons working
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end

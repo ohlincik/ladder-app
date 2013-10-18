@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="row">
-	<div class="span2 offset2">
+	<div class="col-sm-3 col-md-2 col-md-offset-2">
 		<div class="rank-badge">
 			<% if current_player.rank.to_i > 0 %>
 				<p class="rank">
@@ -18,8 +18,8 @@
 			<% end %>
 		</div>
 	</div>
-	<div class="span6">
-		<h2><%= "#{current_player.first_name} #{current_player.last_name}" %></h2>
+	<div class="col-sm-9 col-md-6">
+		<h2><%= current_player.name %></h2>
 		<h5>Competing since <%= current_player.created_at.to_date.to_s(:long) %></h5>
 		<hr>
 
@@ -44,22 +44,28 @@
 							<th>Rank</th>
 							<th>Player</th>
 							<th>&nbsp;</th>
+							<th>Active Challenges</th>
 						</tr>
 					</thead>
 					<tbody>
 					<% @players.each do |p| %>
 						<tr>
 							<td><%= p.rank %></td>
-							<td><%= "#{p.first_name} #{p.last_name}" %></td>
+							<td><%= p.name %></td>
 							<% if p.challenge_issued? %>
+								<td><span class="glyphicon glyphicon-arrow-right text-success"></span></p>
 								<td>
-									Issued challenge to <%= "#{p.challenges.last.challenged_player.first_name} #{p.challenges.last.challenged_player.last_name}" %>
+									<%= p.last_challenge.challenged_player.name %>
+									<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
 								</td>
 							<% elsif p.challenge_match_pending? %>
+								<td><span class="glyphicon glyphicon-arrow-left text-danger"></span></td>
 								<td>
-									Challenged by <%= "#{p.challenge_matches.last.challenger.first_name} #{p.challenge_matches.last.challenger.last_name}" %>
+									<%= p.last_challenge.challenger.name %>
+									<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
 								</td>
 							<% else %>
+								<td>&nbsp;</td>
 								<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
 							<% end %>
 						</tr>

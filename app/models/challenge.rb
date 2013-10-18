@@ -25,9 +25,9 @@ class Challenge
 
 	def player_full_name
 		if self.challenge?
-			"#{@player.challenges.last.challenged_player.first_name} #{@player.challenges.last.challenged_player.last_name}"
+			@player.last_challenge.challenged_player.name
 		else
-			"#{@player.challenge_matches.last.challenger.first_name} #{@player.challenge_matches.last.challenger.last_name}"
+			@player.last_challenge.challenger.name
 		end			
 	end
 

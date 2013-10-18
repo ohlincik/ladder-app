@@ -1,25 +1,29 @@
 <div class="row">
-	<div class="span6 offset3">
+	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 
 		<h2>Change your password</h2>
 
 		<br>
 
-		<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { method: :put, class: 'form-horizontal' }) do |f| %>
-		  <%= devise_error_messages! %>
-		  <%= f.input :reset_password_token, as: :hidden %>
+		<div class="container">
 
-		  <%= f.input :password, :autofocus => true, label: 'New Password' %>
+			<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { method: :put, class: 'form-horizontal', role: 'form' }) do |f| %>
+			  <%= devise_error_messages! %>
+			  <%= f.input :reset_password_token, as: :hidden %>
 
-		  <%= f.input :password_confirmation, label: 'Confirm New Password' %>
+			  <%= f.input :password, :autofocus => true, label: 'New Password' %>
 
-			<div class="form-actions">
-				<%= f.button :submit, "Change my password", disable_with: 'Changing password...' %>
-			</div>
+			  <%= f.input :password_confirmation, label: 'Confirm New Password' %>
 
-		<% end %>
+				<div class="form-group">
+					<%= f.button :submit, "Change my password", class: 'btn-primary', disable_with: 'Changing password...' %>
+				</div>
 
-		<%= render "devise/shared/links" %>
+			<% end %>
+
+			<%= render "devise/shared/links" %>
+
+		</div>
 
 	</div>
 </div>

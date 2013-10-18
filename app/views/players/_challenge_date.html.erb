@@ -1,0 +1,15 @@
+<% 
+	days_ago = distance_of_time_in_days(challenge.created_at, Date.current)
+
+	if days_ago > 7
+		active_class = 'text-danger'
+	elsif days_ago > 4
+		active_class = 'text-warning'
+	else
+		active_class = 'text-success'
+	end
+%>
+
+<small>(<span class="<%= active_class %>">
+	<%= distance_of_time_in_words_to_now(challenge.created_at) %> ago
+</span>)</small>

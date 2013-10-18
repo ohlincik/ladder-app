@@ -4,17 +4,21 @@
 	<tr>
 <% end %>
 		<td><%= player.rank %></td>
-		<td><%= "#{player.first_name} #{player.last_name}" %></td>
+		<td><%= player.name %></td>
 		<% if player.challenge_issued? %>
+			<td><span class="glyphicon glyphicon-arrow-right text-success"></span></td>
 			<td>
-				Issued challenge to <%= "#{player.challenges.last.challenged_player.first_name} #{player.challenges.last.challenged_player.last_name}" %>
+				<%= player.last_challenge.challenged_player.name %>
+				<%= render partial: "challenge_date", object: player.last_challenge, as: 'challenge' %>
 			</td>
 		<% elsif player.challenge_match_pending? %>
+			<td><span class="glyphicon glyphicon-arrow-left text-danger"></span></td>
 			<td>
-				Challenged by <%= "#{player.challenge_matches.last.challenger.first_name} #{player.challenge_matches.last.challenger.last_name}" %>
+				<%= player.last_challenge.challenger.name %>
+				<%= render partial: "challenge_date", object: player.last_challenge, as: 'challenge' %>
 			</td>
 		<% else %>
-			<td>&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
 		<% end %>
 		</td>
 	</tr>

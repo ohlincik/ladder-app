@@ -1,33 +1,37 @@
 <div class="row">
-  <div class="span6 offset3">
+  <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 
     <h2>Sign up</h2>
 
     <p>Here you can sign up to participate in LECOM Ladder. Only current members of the LECOM Medical Fitness &amp; Wellness Center are eligible. If you are not currently a member, please visit the <a href="http://www.lecomwellness.com/" target="_blank">LECOM Wellness</a> website first to learn about their memberships.</p>
 
     <hr>
+    
+    <div class="container">
 
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
-      <%= devise_error_messages! %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal', role: 'form' }) do |f| %>
+        <%= devise_error_messages! %>
 
-      <%= f.input :first_name, :autofocus => true %>
+        <%= f.input :first_name, :autofocus => true %>
 
-      <%= f.input :last_name %>
+        <%= f.input :last_name %>
 
-      <%= f.input :phone %>
+        <%= f.input :phone %>
 
-      <%= f.input :email %>
+        <%= f.input :email %>
 
-      <%= f.input :password %>
+        <%= f.input :password %>
 
-      <%= f.input :password_confirmation, label: 'Confirm Password' %>
+        <%= f.input :password_confirmation, label: 'Confirm Password' %>
 
-      <div class="form-actions">
-        <%= f.button :submit, 'Sign up', class: 'btn-primary', disable_with: 'Signing you up...' %>
-      </div>
-    <% end %>
+        <div class="form-group">
+          <%= f.button :submit, 'Sign up', class: 'btn-primary', disable_with: 'Signing you up...' %>
+        </div>
+      <% end %>
 
-    <%= render "devise/shared/links" %>
+      <%= render "devise/shared/links" %>
+    
+    </div>
 
   </div>
 </div>

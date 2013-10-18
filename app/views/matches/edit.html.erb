@@ -13,21 +13,21 @@
 <% end %>
 
 <div class="row">
-	<div class="span6 offset3">
+	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 
 		<h2>Match Results</h2>
-		<%= simple_form_for @match do |f| %>
+		<%= simple_form_for(@match, html: { role: 'form' }) do |f| %>
 			
 			<div class="date-select">
-				<%= f.input :played_at, as: :date, class: 'span2' %>
+				<%= f.input :played_at, as: :date, class: 'col-md-4' %>
 			</div>
 
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>&nbsp;</th>
-						<th><%= "#{@match.challenger.first_name} #{@match.challenger.last_name}" %></th>
-						<th><%= "#{@match.challenged_player.first_name} #{@match.challenged_player.last_name}" %></th>
+						<th><%= @match.challenger.name %></th>
+						<th><%= @match.challenged_player.name %></th>
 					</tr>
 				</thead>
 				<tbody class="score">
@@ -48,8 +48,8 @@
 					</tr>
 				</tbody>
 			</table>
-
-			<div class="form-actions">
+			<hr>
+			<div class="form-group">
 		    <%= f.button :submit, 'Submit Match Results', class: "btn-primary", disable_with: 'Working...' %>
 		    <%= link_to 'Cancel and Go Back', player_path(current_player), :class => 'btn' %>
 		  </div>

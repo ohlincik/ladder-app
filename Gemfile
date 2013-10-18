@@ -15,7 +15,7 @@ gem 'exception_notification', '3.0.1'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails',   '>= 3.2'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'asset_sync', '0.5.4'
@@ -24,7 +24,7 @@ end
 # jQuery and the jQuery-ujs driver for your Rails 3 application.
 gem 'jquery-rails', '2.1.4'
 # Twitter's Bootstrap, converted to Sass and ready to drop into Rails or Compass
-gem 'bootstrap-sass', '2.3.1.0'
+#gem 'bootstrap-sass', '~>2.3.2.1'
 # Forms made easy
 gem 'simple_form', "~> 2.1.0"
 # TabsOnRails is a simple Rails plugin for creating tabs and navigation menus.

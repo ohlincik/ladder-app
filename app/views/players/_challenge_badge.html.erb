@@ -25,14 +25,14 @@
 %>
 
 	<div class="row">
-		<div class="span4 offset1">
+		<div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
 			<div class="challenge-badge text-center">
 				<h4><%= heading %></h4>
 				<h3><%= current_challenge.player_full_name %></h3>
 				<p><%= date_label %> <%= current_challenge.issued_on.to_date.to_s(:short_ordinal) %></p>
-				<a class="btn btn-mini" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><i class="icon-comment"></i></a>
+				<a class="btn btn-link" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><h4><span class="glyphicon glyphicon-info-sign"></span></h4></a>
 				<hr>
-				<p class="text-center"><%= link_to "Submit Score", edit_match_path(current_challenge.id), :class =>'btn' %></p>
+				<p class="text-center"><%= link_to "Submit Score", edit_match_path(current_challenge.id), :class =>'btn btn-primary' %></p>
 				<% if show_cancel_link %>
 					<p class="text-center"><%= link_to "Cancel Challenge", match_path(current_challenge.id), method: :delete, confirm: "Are you sure?" %></p>
 				<% end %>
