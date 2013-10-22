@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# require Ruby 1.9.3 on Heroku
+ruby '1.9.3'
+# require Rails 3.2
 gem 'rails', '3.2.11'
 # HTML, XML, SAX, and Reader parser. Among Nokogiri's many features is the ability to search documents via XPath or CSS3 selectors.
 gem 'nokogiri', '1.5.6'
