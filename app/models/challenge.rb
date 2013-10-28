@@ -32,26 +32,22 @@ class Challenge
 	end
 
 	def issued_on
-		if self.challenge?
-			@player.challenges.last.created_at
-		else
-			@player.challenge_matches.last.created_at
-		end
+		@player.last_challenge.created_at
 	end
 
 	def contact_email
 		if self.challenge?
-			@player.challenges.last.challenged_player.email
+			@player.last_challenge.challenged_player.email
 		else
-			@player.challenge_matches.last.challenger.email
+			@player.last_challenge.challenger.email
 		end
 	end
 
 	def contact_phone
 		if self.challenge?
-			@player.challenges.last.challenged_player.phone
+			@player.last_challenge.challenged_player.phone
 		else
-			@player.challenge_matches.last.challenger.phone
+			@player.last_challenge.challenger.phone
 		end
 	end
 

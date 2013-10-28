@@ -13,11 +13,7 @@ class Player < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :rank, :first_name, :last_name, :phone, :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-
+  
   def name
     "#{first_name} #{last_name}"
   end
@@ -67,7 +63,7 @@ class Player < ActiveRecord::Base
   def challenge_reissue_delay? player
     if self.any_challenges?
       re_challenge_time_delay = Ladder::Application.config.re_challenge_time_delay
-      last_challenge = self.challenges.find_last_by_challenged_player_id(player.id)
+      last_challenge = self.challenges.where({ challenged_player_id: player.id }).last
       if last_challenge
         if !last_challenge.challenger_victorious?
           last_challenge.played_at.advance(days: re_challenge_time_delay) > Date.current
@@ -78,7 +74,7 @@ class Player < ActiveRecord::Base
 
   def challenge_reissue_date player
     re_challenge_time_delay = Ladder::Application.config.re_challenge_time_delay
-    last_challenge = self.challenges.find_last_by_challenged_player_id(player.id)
+    last_challenge = self.challenges.where({ challenged_player_id: player.id }).last
     last_challenge.played_at.advance(days: re_challenge_time_delay)
   end
 

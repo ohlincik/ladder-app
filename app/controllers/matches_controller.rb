@@ -13,7 +13,7 @@ class MatchesController < ApplicationController
 	end
 
 	def create
-		match = Match.new(params[:match])
+		match = Match.new(match_params)
 		if match.save
 			flash.notice = "Challenge successfully submitted."
 			PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message]).deliver
@@ -32,7 +32,7 @@ class MatchesController < ApplicationController
 	def update
 		@match = Match.find(params[:id])
 
-		@match.attributes = params[:match]
+		@match.attributes = match_params
 
 		if @match.played_at_valid? and @match.score_valid?
 			flash.notice = @match.declare_winner(current_player)
@@ -65,6 +65,15 @@ class MatchesController < ApplicationController
 
 		flash.notice = "Challenge successfully canceled."
 		redirect_to player_path(current_player)
+	end
+
+private
+
+	def match_params
+		params.require(:match).permit(:challenged_player_id, :challenger_id,
+  	:challenged_player_game1, :challenged_player_game2, :challenged_player_game3,
+  	:challenger_game1, :challenger_game2, :challenger_game3,
+  	:played_at, :scheduled_for, :winner)
 	end
 
 end

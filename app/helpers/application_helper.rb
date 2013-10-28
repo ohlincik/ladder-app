@@ -11,4 +11,12 @@ module ApplicationHelper
 		from_time, to_time = to_time, from_time if from_time > to_time
 		distance_in_days = (((to_time - from_time).abs) / 86400).round
 	end
+
+	def display_phone(phone_number)
+		if phone_number 
+			number_to_phone(phone_number.gsub(/\D/, ''), area_code: true)
+		else
+			'n/a'
+		end
+	end
 end

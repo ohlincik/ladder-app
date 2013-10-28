@@ -16,7 +16,7 @@
 			  <%= f.input :password_confirmation, label: 'Confirm New Password' %>
 
 				<div class="form-group">
-					<%= f.button :submit, "Change my password", class: 'btn-primary', disable_with: 'Changing password...' %>
+					<%= f.button :submit, "Change my password", class: 'btn-primary', data: { disable_with: 'Changing password...' } %>
 				</div>
 
 			<% end %>

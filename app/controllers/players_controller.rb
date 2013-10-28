@@ -32,4 +32,10 @@ class PlayersController < ApplicationController
 		end
 	end
 
+private
+
+	def player_params
+		params.require(:player).permit(:rank, :first_name, :last_name, :phone, :email, :password, :password_confirmation, :remember_me)
+	end
+
 end

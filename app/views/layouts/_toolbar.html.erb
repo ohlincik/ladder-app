@@ -36,7 +36,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <%= link_to destroy_player_session_path, method: 'delete', confirm: 'Do you really want to sign out?' do %>
+              <%= link_to destroy_player_session_path, method: 'delete', data: { confirm: 'Do you really want to sign out?' } do %>
                 <span class="glyphicon glyphicon-eject"></span> Sign out
               <% end %>
             </li>

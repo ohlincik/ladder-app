@@ -6,11 +6,6 @@ class Match < ActiveRecord::Base
 
 	cattr_accessor :alert, :score
 
-  attr_accessible :challenged_player_id, :challenger_id,
-  	:challenged_player_game1, :challenged_player_game2, :challenged_player_game3,
-  	:challenger_game1, :challenger_game2, :challenger_game3,
-  	:played_at, :scheduled_for, :winner
-
   def score_select
   	(0..15).to_a
   end

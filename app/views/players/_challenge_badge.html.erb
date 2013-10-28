@@ -41,5 +41,5 @@
 	</div>
 	<div id="contact-info-data" style="display:none">
 		<strong>Email:</strong> <a href="mailto:<%= current_challenge.contact_email %>"><%= current_challenge.contact_email %></a><br>
-		<strong>Phone:</strong> <%= current_challenge.contact_phone %>
+		<strong>Phone:</strong> <%= display_phone(current_challenge.contact_phone) %>
 	</div>

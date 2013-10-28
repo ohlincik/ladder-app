@@ -50,7 +50,7 @@
 			</table>
 			<hr>
 			<div class="form-group">
-		    <%= f.button :submit, 'Submit Match Results', class: "btn-primary", disable_with: 'Working...' %>
+		    <%= f.button :submit, 'Submit Match Results', class: "btn-primary", data: { disable_with: 'Working...' } %>
 		    <%= link_to 'Cancel and Go Back', player_path(current_player), :class => 'btn' %>
 		  </div>
 		<% end %>

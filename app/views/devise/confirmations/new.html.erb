@@ -15,7 +15,7 @@
 			  <%= f.input :email, :autofocus => true %>
 
 			  <div class="form-group">
-			  	<%= f.button :submit, 'Resend', class: "btn-primary", disable_with: 'Sending email...' %>
+			  	<%= f.button :submit, 'Resend', class: "btn-primary", data: { disable_with: 'Sending email...' } %>
 			  </div>
 			<% end %>
 
