@@ -72,8 +72,10 @@ Ladder::Application.configure do
   config.action_mailer.default_url_options = { :host => 'www.lecomladder.com' }
 
   # Configure the ExecptionNotification to send emails
-  config.middleware.use ExceptionNotifier,
-    :email_prefix => "[Ladder Error] ",
-    :sender_address => %{"LECOM Ladder" <mailer@lecomladder.com>},
-    :exception_recipients => %w{ohlincik+ladder@gmail.com}
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Ladder Error] ",
+      :sender_address => %{"LECOM Ladder" <mailer@lecomladder.com>},
+      :exception_recipients => %w{ohlincik+ladder@gmail.com}
+    }
 end
