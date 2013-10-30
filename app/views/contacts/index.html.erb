@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+		<h2>Players Contact List</h2>
+		<p>You can use the list below to contact any player on the ladder and schedule a practise match.</p>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Rank</th>
+					<th>Player</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= render partial: "contact", collection: @ranked_contacts %>
+				<%= render partial: "contact", collection: @new_contacts %>
+			</tbody>
+		</table>
+	</div>
+</div>

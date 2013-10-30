@@ -12,9 +12,13 @@
 
           <%= f.input :last_name %>
 
-          <%= f.input :phone %>
+          <%= f.input :phone, hint: "use any format you'd like but include your area code", placeholder: "e.g. 814-555-3425" %>
 
           <%= f.input :email %>
+
+          <%= f.input :scheduling_info, label: "Best times to schedule a match", hint: "displayed to your challenger while scheduling a match", placeholder: "e.g. Wednesdays and Thursdays after 5pm", input_html: { rows: 5 } %>
+
+          <%= f.input :show_contact_info, label: "Show my contact details to other players" %>
 
         </div>
         <div class="visible-xs"><hr></div>
@@ -24,11 +28,11 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
 
-          <%= f.input :password, :autocomplete => "off", hint: "(leave blank if you don't want to change it )" %>
+          <%= f.input :password, autocomplete: 'off', hint: "(leave blank if you don't need to change it)" %>
 
           <%= f.input :password_confirmation %>
 
-          <%= f.input :current_password, hint: "(we need your current password to confirm your changes)" %>
+          <%= f.input :current_password, hint: "(so we can confirm your changes)" %>
 
         </div>
       </div>

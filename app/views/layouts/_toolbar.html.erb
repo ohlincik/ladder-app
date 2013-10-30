@@ -24,6 +24,11 @@
               <span class="glyphicon glyphicon-list"></span> Ladder Rankings
             <% end %>
           </li>
+          <li <%= active_page('contacts','index') %>>
+            <%= link_to contacts_path do %>
+              <span class="glyphicon glyphicon-book"></span> Contact List
+            <% end %>
+          </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
