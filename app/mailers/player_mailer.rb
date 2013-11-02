@@ -1,10 +1,15 @@
 class PlayerMailer < ActionMailer::Base
   default from: "LECOM Ladder <mailer@lecomladder.com>", return_path: "ohlincik@gmail.com"
 
-  def challenge_email(challenger, challenged_player, message)
+  def challenge_email(challenger, challenged_player, message, include_scheduling_info)
   	@challenger = challenger
   	@challenged_player = challenged_player
   	@message = message
+    if include_scheduling_info
+      @scheduling_info = challenger.scheduling_info
+    else
+      @scheduling_info = false
+    end
   	mail(
       to: "#{challenged_player.name} <#{challenged_player.email}>",
       from: "#{challenger.name} <mailer@lecomladder.com>",

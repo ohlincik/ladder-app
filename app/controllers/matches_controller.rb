@@ -16,7 +16,7 @@ class MatchesController < ApplicationController
 		match = Match.new(match_params)
 		if match.save
 			flash.notice = "Challenge successfully submitted."
-			PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message]).deliver
+			PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message], params[:include_scheduling_info]).deliver
 			redirect_to player_path(current_player)
 		else
 			flash.alert = "Could not schedule the match."

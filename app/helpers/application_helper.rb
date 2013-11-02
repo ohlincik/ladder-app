@@ -13,7 +13,7 @@ module ApplicationHelper
 	end
 
 	def display_phone(phone_number)
-		if phone_number 
+		unless phone_number.blank? 
 			number_to_phone(phone_number.gsub(/\D/, ''), area_code: true)
 		else
 			'n/a'

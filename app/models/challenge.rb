@@ -51,4 +51,12 @@ class Challenge
 		end
 	end
 
+	def scheduling_info
+		if self.challenge?
+			@player.last_challenge.challenged_player.scheduling_info
+		else
+			@player.last_challenge.challenger.scheduling_info
+		end
+	end
+
 end

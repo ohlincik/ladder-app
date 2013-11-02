@@ -8,6 +8,11 @@
       <strong>A message from <%= @challenger.first_name %>:</strong>
       <br>
       <%= simple_format(@message) %>
+      <% if @scheduling_info %>
+        <br>
+        <strong>Best times to schedule a match with <%= @challenger.first_name %>:</strong><br>
+        <%= simple_format(@scheduling_info) %>
+      <% end %>
     </td>
   </tr>
 </table>
