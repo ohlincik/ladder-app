@@ -6,13 +6,18 @@
 	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 		<div class="jumbotron">
 				<h2>Welcome to LECOM Ladder!</h2>
-				<p>The LECOM Ladder is an on-going friendly competition among the racquetball players that are members in good standing at the LECOM Medical Fitness &amp; Wellness Center. Players of <strong>all ages</strong>, <strong>any gender</strong> and <strong>all skill levels</strong> are welcome to participate.</p>
-				<p>To begin your participation, simply review the <a href="/rules">ladder rules</a> and <%= link_to "sign up", new_player_registration_path %>.</p>
-				<hr class="bs-docs-separator">
-				<a href="/rules"><button class="btn btn-large btn-primary" type="button">Ladder Rules</button></a>
-				<%= link_to new_player_registration_path do %>
-					<button class="btn btn-large btn-success" type="button">Sign up</button>
-				<% end %>
+				<p>The LECOM Ladder is an on-going friendly competition among the racquetball players that are members in good standing at the LECOM Medical Fitness &amp; Wellness Center.</p>
+				<p><small>Players of <strong>all ages</strong>, <strong>any gender</strong> and <strong>all skill levels</strong> are welcome to participate. To begin your participation, simply review the <%= link_to "ladder rules", rules_path %> and <%= link_to "sign up", new_player_registration_path %>.</small></p>
+				<hr>
+				<div class="text-center">
+					<%= link_to new_player_session_path do %>
+						<button class="btn btn-lg btn-primary" type="button">Sign in</button>
+					<% end %>
+					&nbsp;
+					<%= link_to new_player_registration_path do %>
+						<button class="btn btn-lg btn-success" type="button">Sign up</button>
+					<% end %>
+				</div>
 		</div> <!-- /jumbotron -->
 	</div>
 </div>
