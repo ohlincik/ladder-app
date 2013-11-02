@@ -31,16 +31,16 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Rank</th>
+						<th class="text-center">Rank</th>
 						<th>Player</th>
 						<th>&nbsp;</th>
-						<th>Active Challenges</th>
+						<th>Challenges</th>
 					</tr>
 				</thead>
 				<tbody>
 				<% @players.each do |p| %>
 					<tr>
-						<td><%= p.rank %></td>
+						<td class="text-center"><%= p.rank %></td>
 						<td><%= p.name %></td>
 						<% if p.id == current_player.id %>
 							<td>&nbsp;</td>

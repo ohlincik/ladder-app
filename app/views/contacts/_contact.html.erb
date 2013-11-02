@@ -1,12 +1,12 @@
 <tr>
 	<% if contact.rank == 0 %>
-		<td><span class="label label-info">new</span></td>
+		<td class="text-center"><span class="label label-info">new</span></td>
 	<% else %>
-		<td><%= contact.rank %></td>
+		<td class="text-center"><%= contact.rank %></td>
 	<% end %>
 		<td><%= contact.name %></td>
 	<% if contact.show_contact_info? %>
-		<td><a href="mailto:<%= contact.email %>"><%= contact.email %></a></td>
+		<td class="hidden-xs"><a href="mailto:<%= contact.email %>"><%= contact.email %></a></td>
 		<td><%= display_phone(contact.phone) %></td>
 		<td align="right">
 			<%= link_to contact_path(contact), class: 'btn btn-default btn-xs' do %>
@@ -14,6 +14,8 @@
 			<% end %>
 		</td>
 	<% else %>
-		<td colspan="3" class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> sorry, this player elected to hide the contact info</td>
+		<td class="hidden-xs text-muted"><span class="glyphicon glyphicon-eye-close"></span> private</td>
+		<td class="text-muted"><span class="glyphicon glyphicon-eye-close"></span> private</td>
+		<td>&nbsp;</td>
 	<% end %>
 </tr>
