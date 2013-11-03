@@ -19,4 +19,30 @@ module ApplicationHelper
 			'n/a'
 		end
 	end
+
+	def match_date_select(days_back)
+
+		possible_match_dates = []
+
+		# add today
+		active_date = ["Today", Date.current]
+		possible_match_dates.push(active_date)
+
+		# add yesterday
+		active_date = ["Yesterday", Date.yesterday]
+		possible_match_dates.push(active_date)
+
+		# add rest of the days
+		days = 2
+		while days <= days_back do
+			temp_date = Date.current - days
+			short_date = temp_date.strftime("%A %-m/%-d")
+			active_date = ["#{days} days ago: #{short_date}", temp_date]
+			possible_match_dates.push(active_date)
+			days +=1
+		end
+
+		# return the collection
+		possible_match_dates
+	end
 end

@@ -1,25 +1,11 @@
-<% content_for :head do %>
-	<script>
-		$(function(){
-			$('#match_played_at_formatted').datepicker({
-					format: 'mm/dd/yyyy'
-				});
-
-			$('#match_played_at_formatted').onclick({
-				$('#match_played_at_formatted').datepicker('show');	
-			});
-		});
-	</script>
-<% end %>
-
 <div class="row">
 	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 
 		<h2>Match Results</h2>
 		<%= simple_form_for(@match, html: { role: 'form' }) do |f| %>
-			
+
 			<div class="date-select">
-				<%= f.input :played_at, as: :date, class: 'col-md-4' %>
+				<%= f.input :played_at, collection: match_date_select(5), label: 'You played the match', selected: @match.played_at %>
 			</div>
 
 			<table class="table table-hover">

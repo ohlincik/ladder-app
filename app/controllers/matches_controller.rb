@@ -26,7 +26,7 @@ class MatchesController < ApplicationController
 
 	def edit
 		@match = Match.find(params[:id])
-		@match.played_at = Date.current
+		@match.played_at = Date.current.to_s(:db)
 	end
 
 	def update
@@ -34,7 +34,7 @@ class MatchesController < ApplicationController
 
 		@match.attributes = match_params
 
-		if @match.played_at_valid? and @match.score_valid?
+		if @match.score_valid?
 			flash.notice = @match.declare_winner(current_player)
 			if @match.save
 				if @match.challenger_victorious?
