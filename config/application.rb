@@ -65,5 +65,10 @@ module Ladder
 
     # Add the fonts directory to get the Bootstrap 3 glyphicons working
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+
+    # Specify a custom layout for the Devise mail messages
+    config.to_prepare do
+        Devise::Mailer.layout "player_mailer"
+    end
   end
 end

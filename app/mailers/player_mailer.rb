@@ -1,5 +1,6 @@
 class PlayerMailer < ActionMailer::Base
   default from: "LECOM Ladder <mailer@lecomladder.com>", return_path: "ohlincik@gmail.com"
+  add_template_helper(ApplicationHelper)
 
   def challenge_email(challenger, challenged_player, message, include_scheduling_info)
   	@challenger = challenger
