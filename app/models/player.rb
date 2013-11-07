@@ -108,6 +108,10 @@ class Player < ActiveRecord::Base
     # set the challenger's rank to stored challenged_player's rank
     challenger.rank = challenged_player.rank
     challenger.save
+
+    # reload the challenged_player's rank
+    challenged_player.rank = Player.find(challenged_player.id).rank
+    challenged_player.save
   end
 
 end

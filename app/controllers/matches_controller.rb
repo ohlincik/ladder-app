@@ -14,6 +14,8 @@ class MatchesController < ApplicationController
 
 	def create
 		match = Match.new(match_params)
+		match.challenger_start_rank = match.challenger.rank
+		match.challenged_player_start_rank = match.challenged_player.rank
 		if match.save
 			flash.notice = "Challenge successfully submitted."
 			PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message], params[:include_scheduling_info]).deliver
@@ -36,12 +38,17 @@ class MatchesController < ApplicationController
 
 		if @match.score_valid?
 			flash.notice = @match.declare_winner(current_player)
-			if @match.save
-				if @match.challenger_victorious?
-					Player.adjust_ranks(@match.challenger, @match.challenged_player)
-				elsif @match.initial_challenges_complete?
-					@match.challenger.add_to_bottom_of_ladder
-				end
+
+			if @match.challenger_victorious?
+				Player.adjust_ranks(@match.challenger, @match.challenged_player)
+			elsif @match.initial_challenges_complete?
+				@match.challenger.add_to_bottom_of_ladder
+			end
+
+			@match.challenger_end_rank = @match.challenger.rank
+			@match.challenged_player_end_rank = @match.challenged_player.rank
+			
+			if @match.save	
 				if current_player == @match.challenger
 					PlayerMailer.challenge_completed_by_challenger_email(@match).deliver
 				else
