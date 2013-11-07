@@ -80,7 +80,12 @@ class Player < ActiveRecord::Base
 
   def self.within_challenge_range player
     challenge_gap = Ladder::Application.config.challenge_gap
-    where("rank > ?", player.rank - challenge_gap.to_i).limit(challenge_gap.to_i)    
+    if (player.rank - challenge_gap.to_i) < 0
+      base_rank = 0
+    else
+      base_rank = player.rank - challenge_gap.to_i
+    end
+    where("rank > ?", base_rank).limit(challenge_gap.to_i)
   end
 
   def self.active_ladder
