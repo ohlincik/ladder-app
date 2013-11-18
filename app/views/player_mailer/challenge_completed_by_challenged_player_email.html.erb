@@ -5,52 +5,67 @@ else
   table_width = "33%"
 end
 %>
-<h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 500; font-size: 22px; margin: 0 0 15px; padding: 0;">Your Challenge Match score is in...</h2>&#13;
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 17px; line-height: 1.6; margin: 0 0 10px; padding: 0;">The challenged player, <%= @match.challenged_player.name %>, has submitted the score for your challenge match played on <%= @match.played_at.to_date.to_formatted_s(:long_ordinal) %>.</p>&#13;
-<br />&#13;
+
+<h2>Your Challenge Match score is in...</h2>
+
+<p>The challenged player, <%= @match.challenged_player.name %>, has submitted the score for your challenge match played on <%= @match.played_at.to_date.to_formatted_s(:long_ordinal) %>.</p>
+<br />
 <% if @match.challenged_player.id == @match.winner %>
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;">The challenged player won the match with the following scores:</p>&#13;
-  <table cellspacing="5" cellpadding="15" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><td align="center" width="<%= table_width %>" bgcolor="#ebebeb" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 200; font-size: 18px; line-height: 1; color: #6f6f6f; margin: 0 0 5px; padding: 0;">GAME 1</p>&#13;
-  <h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 400; font-size: 32px; margin: 0; padding: 0;"><%= @match.challenged_player_game1 %>:<%= @match.challenger_game1 %></h2>&#13;
-  </td>&#13;
-  <td align="center" width="<%= table_width %>" bgcolor="#ebebeb" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 200; font-size: 18px; line-height: 1; color: #6f6f6f; margin: 0 0 5px; padding: 0;">GAME 2</p>&#13;
-  <h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 400; font-size: 32px; margin: 0; padding: 0;"><%= @match.challenged_player_game2 %>:<%= @match.challenger_game2 %></h2>&#13;
-  </td>&#13;
-  <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
-    <td align="center" width="<%= table_width %>" bgcolor="#ebebeb" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 200; font-size: 18px; line-height: 1; color: #6f6f6f; margin: 0 0 5px; padding: 0;">GAME 3</p>&#13;
-    <h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 400; font-size: 32px; margin: 0; padding: 0;"><%= @match.challenged_player_game3 %> : <%= @match.challenger_game3 %></h2>&#13;
-    </td>&#13;
-  <% end %>
-  </tr></table>&#13;
-  <br />&#13;
-  <table cellpadding="15" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><td align="center" bgcolor="#ECF8FF" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 0px; padding: 0;">Your rank remains unchanged...</p>&#13;
-  </td>&#13;
-  </tr></table>&#13;
+  <p>The challenged player won the match with the following scores:</p>
+  <table class="scores" cellspacing="5" cellpadding="15">
+    <tr>
+      <td align="center" width="<%= table_width %>" bgcolor="#ebebeb">
+        <p>GAME 1</p>
+        <h2><%= @match.challenged_player_game1 %>:<%= @match.challenger_game1 %></h2>
+      </td>
+      <td align="center" width="<%= table_width %>" bgcolor="#ebebeb">
+        <p>GAME 2</p>
+        <h2><%= @match.challenged_player_game2 %>:<%= @match.challenger_game2 %></h2>
+      </td>
+    <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
+      <td align="center" width="<%= table_width %>" bgcolor="#ebebeb">
+        <p>GAME 3</p>
+        <h2><%= @match.challenged_player_game3 %> : <%= @match.challenger_game3 %></h2>
+      </td>
+    <% end %>
+    </tr>
+  </table>
+  <br />
+  <table class="callout" cellpadding="15">
+    <tr>
+      <td align="center" bgcolor="#ECF8FF">
+        <p>Your rank remains unchanged...</p>
+      </td>
+    </tr>
+  </table>
 <% else %>
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;">You won the match with the following scores:</p>&#13;
-  <table cellspacing="5" cellpadding="15" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><td align="center" width="<%= table_width %>" bgcolor="#ebebeb" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 200; font-size: 18px; line-height: 1; color: #6f6f6f; margin: 0 0 5px; padding: 0;">GAME 1</p>&#13;
-  <h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 400; font-size: 32px; margin: 0; padding: 0;"><%= @match.challenger_game1 %>:<%= @match.challenged_player_game1 %></h2>&#13;
-  </td>&#13;
-  <td align="center" width="<%= table_width %>" bgcolor="#ebebeb" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 200; font-size: 18px; line-height: 1; color: #6f6f6f; margin: 0 0 5px; padding: 0;">GAME 2</p>&#13;
-  <h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 400; font-size: 32px; margin: 0; padding: 0;"><%= @match.challenger_game2 %>:<%= @match.challenged_player_game2 %></h2>&#13;
-  </td>&#13;
-  <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
-    <td align="center" width="<%= table_width %>" bgcolor="#ebebeb" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 200; font-size: 18px; line-height: 1; color: #6f6f6f; margin: 0 0 5px; padding: 0;">GAME 3</p>&#13;
-    <h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 400; font-size: 32px; margin: 0; padding: 0;"><%= @match.challenger_game3 %>:<%= @match.challenged_player_game3 %></h2>&#13;
-    </td>&#13;
-  <% end %>
-  </tr></table>&#13;
-  <br />&#13;
-  <table cellpadding="15" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><td align="center" bgcolor="#ECF8FF" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-  <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 0px; padding: 0;">Your new rank is <%= @match.challenged_player.rank %></p>&#13;
-  </td>&#13;
-  </tr></table>&#13;
+  <p>You won the match with the following scores:</p>
+    <table class="scores" cellspacing="5" cellpadding="15">
+      <tr>
+        <td align="center" width="<%= table_width %>" bgcolor="#ebebeb">
+          <p>GAME 1</p>
+          <h2><%= @match.challenger_game1 %>:<%= @match.challenged_player_game1 %></h2>
+        </td>
+        <td align="center" width="<%= table_width %>" bgcolor="#ebebeb">
+          <p>GAME 2</p>
+          <h2><%= @match.challenger_game2 %>:<%= @match.challenged_player_game2 %></h2>
+        </td>
+      <% unless @match.challenger_game3.to_i == 0 and @match.challenged_player_game3.to_i == 0 %>
+        <td align="center" width="<%= table_width %>" bgcolor="#ebebeb">
+          <p>GAME 3</p>
+          <h2><%= @match.challenger_game3 %>:<%= @match.challenged_player_game3 %></h2>
+        </td>
+      <% end %>
+      </tr>
+    </table>
+    <br />
+    <table class="callout" cellpadding="15">
+      <tr>
+        <td align="center" bgcolor="#ECF8FF">
+          <p>Your new rank is <%= @match.challenged_player.rank %></p>
+        </td>
+      </tr>
+    </table>
 <% end %>
-<br /><p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;">Thanks for participating!</p>&#13;
+<br />
+<p>Thanks for participating!</p>

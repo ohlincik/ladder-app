@@ -1,3 +1,9 @@
-<h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 500; font-size: 22px; margin: 0 0 15px; padding: 0;">Welcome to LECOM Ladder!</h2>&#13;
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;">You have signed up for an account at <strong style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">www.lecomladder.com</strong>. You can access your player profile and start challenging other players as soon as you confirm your account email clicking the button below:</p>&#13;
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;"><%= link_to confirmation_url(@resource, :confirmation_token => @token), style: "font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #FFF; text-decoration: none; font-weight: bold; text-align: center; cursor: pointer; display: block !important; background-image: none !important; background-color: #666; margin: 0 0 10px; padding: 10px 16px;" do %>&gt;&gt; Confirm my account<% end %></p>&#13;
+<h2>Welcome to LECOM Ladder!</h2>
+
+<p>You have signed up for an account at <strong>www.lecomladder.com</strong>. You can access your player profile and start challenging other players as soon as you confirm your account email clicking the button below:</p>
+
+<p>
+	<%= link_to confirmation_url(@resource, :confirmation_token => @token), class: "btn" do %>
+		&gt;&gt; Confirm my account
+	<% end %>
+</p>

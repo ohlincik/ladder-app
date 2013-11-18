@@ -1,18 +1,36 @@
-<h2 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #000; font-weight: 500; font-size: 22px; margin: 0 0 15px; padding: 0;">You got challenged by <%= @challenger.name %>...</h2>&#13;
-&#13;
-<table width="100%" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><td bgcolor="#ebebeb" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;"> &#13;
-      <h4 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #444; font-weight: 900; font-size: 14px; text-transform: uppercase; margin: 0 0 15px; padding: 0;">A message from <%= @challenger.first_name %>:</h4>&#13;
-      <%= simple_format(@message, style: "font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;") %>
-<% if @scheduling_info -%>
-      <br /><h4 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; color: #444; font-weight: 900; font-size: 14px; text-transform: uppercase; margin: 0 0 15px; padding: 0;">Best times to schedule a match with <%= @challenger.first_name %>:</h4>&#13;
-      <%= simple_format(@scheduling_info, style: "font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;") %>
-<% end -%>
-    </td>&#13;
-  </tr></table><br style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;" /><p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;">Pease communicate directly with the challenger using the following contact info:</p>&#13;
-&#13;
-<table cellpadding="15" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><td bgcolor="#ECF8FF" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 15px;">&#13;
-      <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;"><strong style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">Email:</strong> <%= @challenger.email %></p>&#13;
-      <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 0px; padding: 0;"><strong style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">Phone:</strong> <%= display_phone(@challenger.phone) %></p>&#13;
-    </td>&#13;
-  </tr></table><br /><p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;">You can also find the challenger's contact information when you login to our account on the <a href="http://lecomladder.com" target="_blank" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; color: #2BA6CB; margin: 0; padding: 0;">LECOM Ladder website</a>.</p>&#13;
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; margin: 0 0 10px; padding: 0;">Thanks for participating!</p>&#13;
+<h2>You got challenged by <%= @challenger.name %>...</h2>
+
+<table class="message" width="100%">
+  <tr>
+    <td bgcolor="#ebebeb">  
+      <h4>A message from <%= @challenger.first_name %>:</h4>
+      <p><%= simple_format(@message) %></p>
+    <% if @scheduling_info %>
+      <br>
+      <h4>Best times to schedule a match with <%= @challenger.first_name %>:</h4>
+      <p><%= simple_format(@scheduling_info) %></p>
+    <% end %>
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<p>Pease communicate directly with the challenger using the following contact info:</p>
+
+<!-- Callout Panel -->
+<table class="callout" cellpadding="15">
+  <tr>
+    <td bgcolor="#ECF8FF">
+      <p><strong>Email:</strong> <%= @challenger.email %></p>
+      <p class="last"><strong>Phone:</strong> <%= display_phone(@challenger.phone) %></p>
+    </td>
+  </tr>
+</table>
+<!-- /Callout Panel -->
+
+<br>
+
+<p>You can also find the challenger's contact information when you login to our account on the <a href="http://lecomladder.com" target="_blank">LECOM Ladder website</a>.</p>
+
+<p>Thanks for participating!</p>
