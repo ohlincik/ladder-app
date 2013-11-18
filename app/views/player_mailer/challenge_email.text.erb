@@ -1,0 +1,21 @@
+You got challenged by <%= @challenger.name %>...
+================================================
+
+A message from <%= @challenger.first_name %>:
+---------------------------------------------
+<%= @message %>
+
+<% if @scheduling_info -%>
+Best times to schedule a match with <%= @challenger.first_name %>:
+---------------------------------------------
+<%= @scheduling_info %>
+
+<% end -%>
+Pease communicate directly with the challenger using the following contact info:
+
+Email: <%= @challenger.email %>
+Phone: <%= display_phone(@challenger.phone) %>
+
+You can also find the challenger's contact information when you login to our account on the LECOM Ladder website [http://lecomladder.com].
+
+Thanks for participating!
