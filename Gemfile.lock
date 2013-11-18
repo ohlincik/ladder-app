@@ -25,6 +25,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     arel (4.0.1)
     asset_sync (1.0.0)
       activemodel
@@ -39,6 +40,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    css_parser (1.3.5)
+      addressable
     daemons (1.1.9)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
@@ -71,6 +74,10 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    launchy (2.4.0)
+      addressable (~> 2.3)
+    letter_opener (1.1.2)
+      launchy (~> 2.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -103,6 +110,11 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
+    roadie (2.4.2)
+      actionmailer (> 3.0.0, < 5.0.0)
+      css_parser (~> 1.3.4)
+      nokogiri (> 1.5.0)
+      sprockets
     ruby-hmac (0.4.0)
     sass (3.2.12)
     sass-rails (4.0.1)
@@ -149,9 +161,11 @@ DEPENDENCIES
   devise (~> 3.1.1)
   exception_notification (~> 4.0.1)
   jquery-rails (~> 3.0.4)
+  letter_opener
   nokogiri (~> 1.6.0)
   pg (~> 0.17.0)
   rails (~> 4.0.0)
+  roadie (~> 2.4.2)
   sass-rails (~> 4.0.1)
   simple_form (~> 3.0.0)
   thin (~> 1.6.0)

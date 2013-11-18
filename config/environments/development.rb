@@ -28,4 +28,7 @@ Ladder::Application.configure do
   config.serve_static_assets = false
   
   config.action_mailer.default_url_options = { :host => 'localhost:5000' }
+
+  # User Letter Opener to preview emails in the browser instead of sending them via SMTP
+  config.action_mailer.delivery_method = :letter_opener
 end

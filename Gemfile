@@ -30,3 +30,7 @@ gem 'jquery-rails', '~> 3.0.4'
 gem 'simple_form', "~> 3.0.0"
 # provides the capabilities for sorting and reordering a number of objects in a list.
 #gem 'acts_as_list', '0.1.9'
+# Preview email in the browser instead of sending it.
+gem "letter_opener", :group => :development
+# Roadie inlines stylesheets and rewrites relative URLs inside emails.
+gem "roadie", "~> 2.4.2"
