@@ -35,7 +35,7 @@ module Ladder
 
     # DEPLOYMENT SPECIFIC CONSTANTS
     # Set the number of ranks that players can challenge
-    config.challenge_gap = 3
+    config.challenge_gap = 4
 
     # Set re-challenge time delay in days that is imposed on challenger if he loses a challenge match
     config.re_challenge_time_delay = 7
