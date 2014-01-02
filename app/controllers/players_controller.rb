@@ -7,6 +7,7 @@ class PlayersController < ApplicationController
 			@show_onboarding_message = true
 			render "show_new_player"
 		else
+			@latest_activity = Match.order(updated_at: :desc).limit(5)
 			if current_player.new_player?
 				@current_challenge = Challenge.new(current_player)
 				@players = Player.active_ladder
@@ -19,7 +20,6 @@ class PlayersController < ApplicationController
 				@players = Player.within_challenge_range(current_player)
 			end
 		end
-		@latest_activity = Match.order(updated_at: :desc).limit(5)
 	end
 
 	def index

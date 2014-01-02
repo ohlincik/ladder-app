@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="row">
-	<div class="col-sm-3 col-md-2 col-md-offset-2">
+	<div class="col-xs-4 col-sm-3">
 		<div class="rank-badge">
 			<% if current_player.rank.to_i > 0 %>
 				<p class="rank">
@@ -18,61 +18,71 @@
 			<% end %>
 		</div>
 	</div>
-	<div class="col-sm-9 col-md-6">
+	<div class="col-xs-8 col-sm-9">
 		<h2><%= current_player.name %></h2>
-		<h5>Competing since <%= current_player.created_at.to_date.to_s(:long) %></h5>
-		<hr>
-
-		<% if @show_onboarding_message %>
-			<p>Thanks for signing up!</p>
-			<p>Currently we are still waiting for more players to get on board. You can see all the players that signed up so far on the <%= link_to 'ladder rankings', players_path %> page. If you know anyone that would like to participate and is not on the list, ask them to sign up.</p>
-			<p>As soon as we have enough players signed up, we are going to establish initial rankings and then the challenges can begin. We will send you an email when it's time to get the ladder going.</p>
-		<% else %>	
-			<% if @current_challenge.challenge? %>
-				<%= render partial: "/players/challenge_badge", object: @current_challenge, as: "current_challenge" %>
+		<h5>Competing since <%= current_player.created_at.to_date.to_formatted_s(:long) %></h5>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12"><hr></div>
+</div>
+<div class="row">
+<% if @show_onboarding_message %>
+	<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+		<p>Thanks for signing up!</p>
+		<p>Currently we are still waiting for more players to get on board. You can see all the players that signed up so far on the <%= link_to 'ladder rankings', players_path %> page. If you know anyone that would like to participate and is not on the list, ask them to sign up.</p>
+		<p>As soon as we have enough players signed up, we are going to establish initial rankings and then the challenges can begin. We will send you an email when it's time to get the ladder going.</p>
+	</div>
+<% else %>
+	<div class="col-sm-6">
+		<% if @current_challenge.challenge? %>
+			<%= render partial: "/players/challenge_badge", object: @current_challenge, as: "current_challenge" %>
+		<% else %>
+			<% if current_player.any_challenges? %>
+				<p>You have <strong>one more challenge remaining</strong> before your initial rank is established. If you lose the next challenge match, you will be placed on the bottom of the ladder.</p>
 			<% else %>
-				<% if current_player.any_challenges? %>
-					<p>You have <strong>one more challenge remaining</strong> before your initial rank is established. If you lose the next challenge match, you will be placed on the bottom of the ladder.</p>
-				<% else %>
-					<p>You can challenge any player on the ladder 2 times before your initial rank is established. If you win your challenge match, you will assume the rank of the challenged player. If you lose the challenge match, you will get another chance to challenge. If you lose both your challenges, you will be placed at the bottom of the ladder.</p>
+				<p>You can challenge any player on the ladder 2 times before your initial rank is established. If you win your challenge match, you will assume the rank of the challenged player. If you lose the challenge match, you will get another chance to challenge. If you lose both your challenges, you will be placed at the bottom of the ladder.</p>
 				<% end %>
-				<p><strong>Good luck!</strong></p>
-				<hr>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Rank</th>
-							<th>Player</th>
-							<th>&nbsp;</th>
-							<th>Active Challenges</th>
-						</tr>
-					</thead>
-					<tbody>
-					<% @players.each do |p| %>
-						<tr>
-							<td><%= p.rank %></td>
-							<td><%= p.name %></td>
-							<% if p.challenge_issued? %>
-								<td><span class="glyphicon glyphicon-arrow-right text-success"></span></p>
-								<td>
-									<%= p.last_challenge.challenged_player.name %>
-									<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
-								</td>
-							<% elsif p.challenge_match_pending? %>
-								<td><span class="glyphicon glyphicon-arrow-left text-danger"></span></td>
-								<td>
-									<%= p.last_challenge.challenger.name %>
-									<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
-								</td>
-							<% else %>
-								<td>&nbsp;</td>
-								<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
-							<% end %>
-						</tr>
-					<% end %>
-					</tbody>
-				</table>
-			<% end %>
+			<p><strong>Good luck!</strong></p>
+			<hr>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Rank</th>
+						<th>Player</th>
+						<th>&nbsp;</th>
+						<th>Active Challenges</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @players.each do |p| %>
+					<tr>
+						<td><%= p.rank %></td>
+						<td><%= p.name %></td>
+						<% if p.challenge_issued? %>
+							<td><span class="glyphicon glyphicon-arrow-right text-success"></span></p>
+							<td>
+								<%= p.last_challenge.challenged_player.name %>
+								<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
+							</td>
+						<% elsif p.challenge_match_pending? %>
+							<td><span class="glyphicon glyphicon-arrow-left text-danger"></span></td>
+							<td>
+								<%= p.last_challenge.challenger.name %>
+								<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
+							</td>
+						<% else %>
+							<td>&nbsp;</td>
+							<td><%= link_to "challenge", new_match_path(:id => p.id) %></td>
+						<% end %>
+					</tr>
+				<% end %>
+				</tbody>
+			</table>
 		<% end %>
 	</div>
+	<div class="col-sm-6">
+		<%= render partial: "/activity/latest", object: @latest_activity, as: 'latest_activity' %>
+	</div>
+<% end %>
 </div>
