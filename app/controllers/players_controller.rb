@@ -7,7 +7,7 @@ class PlayersController < ApplicationController
 			@show_onboarding_message = true
 			render "show_new_player"
 		else
-			@latest_activity = Match.order(updated_at: :desc).limit(5)
+			@latest_activity = Match.order(updated_at: :desc).limit(5).decorate
 			if current_player.new_player?
 				@current_challenge = Challenge.new(current_player)
 				@players = Player.active_ladder

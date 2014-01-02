@@ -5,49 +5,25 @@
 	<tbody>
 	<% latest_activity.each do |a| %>
 		<tr>
-			<% if a.winner? %>
-				<%
-					if a.challenger_victorious?
-						winner = a.challenger.name
-						loser = a.challenged_player.name
-						game1 = "#{a.challenger_game1}:#{a.challenged_player_game1}"
-						game2 = "#{a.challenger_game2}:#{a.challenged_player_game2}"
-						if a.challenger_game3 == 0 and a.challenged_player_game3 == 0
-							game3 = false
-						else
-							game3 = "#{a.challenger_game3}:#{a.challenged_player_game3}"
-						end
-						rank = "(#{a.challenger.first_name} assumed ##{a.challenger_end_rank})"
-					else
-						winner = a.challenged_player.name
-						loser = a.challenger.name
-						game1 = "#{a.challenged_player_game1}:#{a.challenger_game1}"
-						game2 = "#{a.challenged_player_game2}:#{a.challenger_game2}"
-						if a.challenger_game3 == 0 and a.challenged_player_game3 == 0
-							game3 = false
-						else
-							game3 = "#{a.challenged_player_game3}:#{a.challenger_game3}"
-						end
-						rank = ""
-					end
-				%>
-
+			<% if a.match_complete? %>
 				<td class="text-muted text-right">
-					<%= a.played_at.to_s(:mini) %>
+					<%= a.match_played_at %>
 				</td>
 				<td>
 					<strong class="text-success">MATCH COMPLETE</strong><br>
-					<%= winner %> def. <%= loser %><br>
-					<%= game1 %>, <%= game2 %><% if game3 %>, <%= game3 %><% end %>
-					<span class="text-muted"><%= rank %></span>
+					<%= a.winner_name %> def. <%= a.loser_name %><br>
+					<%= a.match_score %>
+					<% if a.rank_changed? %>
+						<span class="text-muted">(<%= a.challenger_first_name %> assumed #<%= a.challenger_end_rank %>)</span>
+					<% end %>
 				</td>
-			<% else %>
+			<% else # challenge issued - match pending %>
 				<td class="text-muted text-right">
-					<%= a.created_at.to_s(:mini) %>
+					<%= a.challenge_issued_at %>
 				</td>
 				<td>
 					<strong class="text-warning">MATCH PENDING</strong><br>
-					<%= a.challenger.name %> challenged <%= a.challenged_player.name %>
+					<%= a.challenger_name %> challenged <%= a.challenged_player_name %>
 				</td>
 			<% end %>
 		</tr>
