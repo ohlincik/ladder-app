@@ -19,6 +19,7 @@ class PlayersController < ApplicationController
 				@players = Player.within_challenge_range(current_player)
 			end
 		end
+		@latest_activity = Match.order(updated_at: :desc).limit(5)
 	end
 
 	def index

@@ -24,33 +24,30 @@
 	end
 %>
 
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-			<div class="challenge-badge text-center">
-				<h4><%= heading %></h4>
-				<h3><%= current_challenge.player_full_name %></h3>
-				<p><%= date_label %> <%= current_challenge.issued_on.to_date.to_s(:short_ordinal) %></p>
-				<hr>
-				<p>
-					<a href="mailto:<%= current_challenge.contact_email %>">Email <%= current_challenge.player_first_name %></a>
-					&bull;
-					<%= display_phone(current_challenge.contact_phone) %>
-				</p>
-				<p><a class="btn btn-link" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><span class="glyphicon glyphicon-calendar"></span> Best times to schedule a match</a></p>
-				<hr>
-				<p class="text-center"><%= link_to "Submit Score", edit_match_path(current_challenge.id), :class =>'btn btn-primary' %></p>
-				<% if show_cancel_link %>
-					<p class="text-center"><%= link_to "Cancel Challenge", match_path(current_challenge.id), method: :delete, confirm: "Are you sure?" %></p>
-				<% end %>
-			</div>
-		</div>
-	</div>
-	<div id="contact-info-data" style="display:none">
-		<% if current_challenge.scheduling_info.blank? %>
-  		<p class="text-muted">
-  			Sorry, this player did not provide any scheduling info.
-  		</p>
-  	<% else %>
-			<%= simple_format(current_challenge.scheduling_info) %>
-		<% end %>
-	</div>
+<div class="challenge-badge text-center">
+	<h4><%= heading %></h4>
+	<h3><%= current_challenge.player_full_name %></h3>
+	<p><%= date_label %> <%= current_challenge.issued_on.to_date.to_s(:short_ordinal) %></p>
+	<hr>
+	<p>
+		<a href="mailto:<%= current_challenge.contact_email %>">Email <%= current_challenge.player_first_name %></a>
+		&bull;
+		<%= display_phone(current_challenge.contact_phone) %>
+	</p>
+	<p><a class="btn btn-link" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><span class="glyphicon glyphicon-calendar"></span> Best times to schedule a match</a></p>
+	<hr>
+	<p class="text-center"><%= link_to "Submit Score", edit_match_path(current_challenge.id), :class =>'btn btn-primary' %></p>
+	<% if show_cancel_link %>
+		<p class="text-center"><%= link_to "Cancel Challenge", match_path(current_challenge.id), method: :delete, confirm: "Are you sure?" %></p>
+	<% end %>
+</div>
+
+<div id="contact-info-data" style="display:none">
+	<% if current_challenge.scheduling_info.blank? %>
+		<p class="text-muted">
+			Sorry, this player did not provide any scheduling info.
+		</p>
+	<% else %>
+		<%= simple_format(current_challenge.scheduling_info) %>
+	<% end %>
+</div>

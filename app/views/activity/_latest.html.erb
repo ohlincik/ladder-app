@@ -1,0 +1,56 @@
+<table class="table">
+	<thead>
+		<th colspan="2">Latest Ladder Activity</th>
+	</thead>
+	<tbody>
+	<% latest_activity.each do |a| %>
+		<tr>
+			<% if a.winner? %>
+				<%
+					if a.challenger_victorious?
+						winner = a.challenger.name
+						loser = a.challenged_player.name
+						game1 = "#{a.challenger_game1}:#{a.challenged_player_game1}"
+						game2 = "#{a.challenger_game2}:#{a.challenged_player_game2}"
+						if a.challenger_game3 == 0 and a.challenged_player_game3 == 0
+							game3 = false
+						else
+							game3 = "#{a.challenger_game3}:#{a.challenged_player_game3}"
+						end
+						rank = "(#{a.challenger.first_name} assumed ##{a.challenger_end_rank})"
+					else
+						winner = a.challenged_player.name
+						loser = a.challenger.name
+						game1 = "#{a.challenged_player_game1}:#{a.challenger_game1}"
+						game2 = "#{a.challenged_player_game2}:#{a.challenger_game2}"
+						if a.challenger_game3 == 0 and a.challenged_player_game3 == 0
+							game3 = false
+						else
+							game3 = "#{a.challenged_player_game3}:#{a.challenger_game3}"
+						end
+						rank = ""
+					end
+				%>
+
+				<td class="text-muted text-right">
+					<%= a.played_at.to_s(:mini) %>
+				</td>
+				<td>
+					<strong class="text-success">MATCH COMPLETE</strong><br>
+					<%= winner %> def. <%= loser %><br>
+					<%= game1 %>, <%= game2 %><% if game3 %>, <%= game3 %><% end %>
+					<span class="text-muted"><%= rank %></span>
+				</td>
+			<% else %>
+				<td class="text-muted text-right">
+					<%= a.created_at.to_s(:mini) %>
+				</td>
+				<td>
+					<strong class="text-warning">MATCH PENDING</strong><br>
+					<%= a.challenger.name %> challenged <%= a.challenged_player.name %>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
