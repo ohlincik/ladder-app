@@ -34,3 +34,5 @@ gem 'simple_form', "~> 3.0.0"
 gem "letter_opener", :group => :development
 # Roadie inlines stylesheets and rewrites relative URLs inside emails.
 gem "roadie", "~> 2.4.2"
+# Draper adds an object-oriented layer of presentation logic
+gem 'draper', '~> 1.3'
