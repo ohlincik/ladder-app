@@ -26,7 +26,7 @@ class MatchDecorator < Draper::Decorator
   end
 
   def loser_name
-  	if not challenger_victorious?
+  	if challenger_victorious?
   		challenged_player.name
   	else
   		challenger.name
