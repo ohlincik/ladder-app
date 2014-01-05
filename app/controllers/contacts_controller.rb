@@ -8,6 +8,8 @@ class ContactsController < ApplicationController
   end
 
   def show
-  	@contact = Player.find(params[:id])
+  	@player = Player.find(params[:id])
+  	matches = Match.where("challenger_id = :player_id OR challenged_player_id = :player_id", {player_id: params[:id]}).order(updated_at: :desc)
+  	@match_history = MatchDecorator.decorate_collection(matches)
   end
 end

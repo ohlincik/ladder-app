@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <%= @contact.name %>'s Player Profile
+  <%= @player.name %>'s Player Profile
 <% end %>
 
 <div class="row">
@@ -11,22 +11,24 @@
   	</p>
   	<hr>
   	<div class="row">
-  		<div class="col-sm-6 col-md-6">
-  			<h2><%= @contact.name %></h2>
-  			<h5>Competing since <%= @contact.created_at.to_date.to_formatted_s(:long) %></h5>
+  		<div class="col-sm-5">
+  			<h2><%= @player.name %></h2>
+  			<h5>Competing since <%= @player.created_at.to_date.to_formatted_s(:long) %></h5>
   			<hr>
-  			<p><strong>Email:</strong> <a href="mailto:<%= @contact.email %>"><%= @contact.email %></a></p>
-		  	<p><strong>Phone:</strong> <%= display_phone(@contact.phone) %></p>
+  			<p><strong>Email:</strong> <a href="mailto:<%= @player.email %>"><%= @player.email %></a></p>
+		  	<p><strong>Phone:</strong> <%= display_phone(@player.phone) %></p>
+        <hr>
+        <h4 style="margin-top:30px">Best times to schedule a match</h4>
+        <% if @player.scheduling_info.blank? %>
+          <p class="text-muted">
+            Sorry, this player did not provide any scheduling info.
+          </p>
+        <% else %>
+          <%= simple_format(@player.scheduling_info) %>
+        <% end %>
   		</div>
-  		<div class="col-sm-6 col-md-6">
-		  	<h4 style="margin-top:30px">Best times to schedule a match</h4>
-		  	<% if @contact.scheduling_info.blank? %>
-		  		<p class="text-muted">
-		  			Sorry, this player did not provide any scheduling info.
-		  		</p>
-		  	<% else %>
-  				<%= simple_format(@contact.scheduling_info) %>
-  			<% end %>
+  		<div class="col-sm-7">
+		  	<%= render partial: "/matches/history", locals: { matches: @match_history, current_player_id: @player.id } %>
 		  </div>
 		</div>
   </div>

@@ -1,0 +1,55 @@
+<table class="table">
+	<thead>
+		<th>&nbsp;</th>
+		<th>Match History</th>
+		<th>Rank</th>
+	</thead>
+	<tbody>
+	<% if matches.any? %>
+		<% matches.each do |m| %>
+			<% if m.match_complete? %>
+			<tr>
+				<td class="text-muted text-right">
+					<%= m.match_played_at %>
+				</td>
+				<td>
+					<% if m.winner == current_player_id %>
+						<span class="text-success">Defeated <%= m.loser_name %></span>
+					<% else %>
+						<span class="text-danger">Lost to <%= m.winner_name %></span>
+					<% end %>
+					<br>
+					<%= m.match_score %>
+				</td>
+				<td class="text-center">
+					<%= m.display_match_rank(current_player_id) %>
+				</td>
+			</tr>
+			<% end %>
+			<tr>
+				<td class="text-muted text-right">
+					<%= m.challenge_issued_at %>
+				</td>
+				<td>
+					<% if m.challenger.id == current_player_id %>
+						<span class="text-primary">Issued challenge to <%= m.challenged_player_name %></span>
+					<% else %>
+						<span class="text-warning">Challenged by <%= m.challenger_name %></span>
+					<% end %>
+				</td>
+				<td class="text-center">
+					<%= m.display_challenge_rank(current_player_id) %>
+				</td>
+			</tr>
+		<% end %>
+	<% else %>
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="2">
+				<br>
+				This player does not have match history yet...
+			</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
