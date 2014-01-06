@@ -4,7 +4,9 @@
 	<tr>
 <% end %>
 		<td class="text-center"><%= player.rank %></td>
-		<td><%= player.name %></td>
+		<td>
+			<%= link_to player.name, contact_path(player), title: "Detailed Profile for #{player.first_name}" %>
+		</td>
 		<% if player.challenge_issued? %>
 			<td><span class="glyphicon glyphicon-arrow-right text-success"></span></td>
 			<td>

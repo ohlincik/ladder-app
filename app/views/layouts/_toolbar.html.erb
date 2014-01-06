@@ -39,6 +39,11 @@
                 <span class="glyphicon glyphicon-edit"></span> Edit Your Profile
               <% end %>
             </li>
+            <li>
+              <%= link_to contact_path(current_player.id) do %>
+                <span class="glyphicon glyphicon-list-alt"></span> Your Match History
+              <% end %>
+            </li>
             <li class="divider"></li>
             <li>
               <%= link_to destroy_player_session_path, method: 'delete', data: { confirm: 'Do you really want to sign out?' } do %>
