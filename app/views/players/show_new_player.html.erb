@@ -21,6 +21,7 @@
 	<div class="col-xs-8 col-sm-9">
 		<h2><%= current_player.name %></h2>
 		<h5>Competing since <%= current_player.created_at.to_date.to_formatted_s(:long) %></h5>
+		<p><%= link_to "View your match history", contact_path(current_player.id) %></p>
 	</div>
 </div>
 <div class="row">
