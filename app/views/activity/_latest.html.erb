@@ -6,9 +6,9 @@
 	<tbody>
 	<% latest_activity.each do |a| %>
 		<tr>
-			<% if a.match_complete? %>
+			<% if a.challenge_completed? %>
 				<td class="text-muted text-right">
-					<%= a.match_played_at %>
+					<%= a.challenge_completed_at %>
 				</td>
 				<td>
 					<strong class="text-success">MATCH COMPLETE</strong><br>
@@ -18,13 +18,21 @@
 						<span class="text-muted">(<%= a.challenger_first_name %> assumed #<%= a.challenger_end_rank %>)</span>
 					<% end %>
 				</td>
-			<% else # challenge issued - match pending %>
+			<% elsif a.challenge_issued? %>
 				<td class="text-muted text-right">
 					<%= a.challenge_issued_at %>
 				</td>
 				<td>
 					<strong class="text-warning">MATCH PENDING</strong><br>
 					<%= a.challenger_name %> challenged <%= a.challenged_player_name %>
+				</td>
+			<% else # challenged canceled %>
+				<td class="text-muted text-right">
+					<%= a.challenge_canceled_at %>
+				</td>
+				<td>
+					<strong class="text-danger">MATCH CANCELED</strong><br>
+					<%= a.challenger_name %> canceled challenge to <%= a.challenged_player_name %>
 				</td>
 			<% end %>
 		</tr>

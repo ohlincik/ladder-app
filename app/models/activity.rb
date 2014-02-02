@@ -1,5 +1,9 @@
 class Activity < ActiveRecord::Base
 
+  def challenger_victorious?
+    challenger_id == winner
+  end
+
   def challenge_issued match
     self.activity_date = match.created_at
     self.activity_type = "Challenge Issued"
