@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107130718) do
+ActiveRecord::Schema.define(version: 20140202170040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.date    "activity_date"
+    t.string  "activity_type"
+    t.integer "challenger_id"
+    t.string  "challenger_first_name"
+    t.string  "challenger_last_name"
+    t.integer "challenger_start_rank"
+    t.integer "challenger_end_rank"
+    t.integer "challenged_player_id"
+    t.string  "challenged_player_first_name"
+    t.string  "challenged_player_last_name"
+    t.integer "challenged_player_start_rank"
+    t.integer "challenged_player_end_rank"
+    t.integer "winner"
+    t.string  "score"
+  end
+
+  add_index "activities", ["challenged_player_id"], name: "index_activities_on_challenged_player_id", using: :btree
+  add_index "activities", ["challenger_id"], name: "index_activities_on_challenger_id", using: :btree
 
   create_table "matches", force: true do |t|
     t.integer  "challenger_id"
@@ -27,8 +47,8 @@ ActiveRecord::Schema.define(version: 20131107130718) do
     t.integer  "challenger_game3"
     t.integer  "challenged_player_game3"
     t.integer  "winner"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "challenger_start_rank"
     t.integer  "challenger_end_rank"
     t.integer  "challenged_player_start_rank"
@@ -49,8 +69,8 @@ ActiveRecord::Schema.define(version: 20131107130718) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "rank",                   default: 0
     t.string   "first_name"
     t.string   "last_name"
