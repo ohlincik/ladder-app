@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
 
   def show
   	@player = Player.find(params[:id])
-  	matches = Match.where("challenger_id = :player_id OR challenged_player_id = :player_id", {player_id: params[:id]}).order(updated_at: :desc)
-  	@match_history = MatchDecorator.decorate_collection(matches)
+    @player_activity = Activity.where("challenger_id = :player_id OR challenged_player_id = :player_id", {player_id: params[:id]}).order(activity_date: :desc)
+  	@player_activity = ActivityDecorator.decorate_collection(@player_activity)
   end
 end

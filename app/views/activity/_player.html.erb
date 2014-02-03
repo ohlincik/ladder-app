@@ -1,0 +1,72 @@
+<table class="table">
+	<thead>
+		<th>&nbsp;</th>
+		<th>Match History</th>
+		<th>Rank</th>
+	</thead>
+	<tbody>
+	<% if activity.any? %>
+		<% activity.each do |a| %>
+			<% if a.challenge_completed? %>
+			<tr>
+				<td class="text-muted text-right">
+					<%= a.challenge_completed_at %>
+				</td>
+				<td>
+					<% if a.winner == current_player_id %>
+						<span class="text-success">Defeated <%= a.loser_name %></span>
+					<% else %>
+						<span class="text-danger">Lost to <%= a.winner_name %></span>
+					<% end %>
+					<br>
+					<%= a.match_score %>
+				</td>
+				<td class="text-center">
+					<%= a.display_match_rank(current_player_id) %>
+				</td>
+			</tr>
+			<% elsif a.challenge_issued? %>
+			<tr>
+				<td class="text-muted text-right">
+					<%= a.challenge_issued_at %>
+				</td>
+				<td>
+					<% if a.challenger_id == current_player_id %>
+						<span class="text-primary">Issued challenge to <%= a.challenged_player_name %></span>
+					<% else %>
+						<span class="text-warning">Challenged by <%= a.challenger_name %></span>
+					<% end %>
+				</td>
+				<td class="text-center">
+					<%= a.display_challenge_rank(current_player_id) %>
+				</td>
+			</tr>
+			<% else # challenge canceled %>
+			<tr>
+				<td class="text-muted text-right">
+					<%= a.challenge_canceled_at %>
+				</td>
+				<td>
+					<% if a.challenger_id == current_player_id %>
+						<span class="text-primary">Canceled challenge to <%= a.challenged_player_name %></span>
+					<% else %>
+						<span class="text-muted">Challenge cancelled by <%= a.challenger_name %></span>
+					<% end %>
+				</td>
+				<td class="text-center">
+					<%= a.display_challenge_rank(current_player_id) %>
+				</td>
+			</tr>
+			<% end %>
+		<% end %>
+	<% else %>
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="2">
+				<br>
+				This player does not have match history yet...
+			</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

@@ -17,6 +17,9 @@ class MatchesController < ApplicationController
 		match.challenger_start_rank = match.challenger.rank
 		match.challenged_player_start_rank = match.challenged_player.rank
 		if match.save
+			activity = Activity.new
+			activity.challenge_issued match
+			activity.save
 			flash.notice = "Challenge successfully submitted."
 			PlayerMailer.challenge_email(current_player, match.challenged_player, params[:message], params[:include_scheduling_info]).deliver
 			redirect_to player_path(current_player)
@@ -48,7 +51,10 @@ class MatchesController < ApplicationController
 			@match.challenger_end_rank = @match.challenger.rank
 			@match.challenged_player_end_rank = @match.challenged_player.rank
 			
-			if @match.save	
+			if @match.save
+				activity = Activity.new
+				activity.challenge_completed @match
+				activity.save
 				if current_player == @match.challenger
 					PlayerMailer.challenge_completed_by_challenger_email(@match).deliver
 				else
@@ -67,6 +73,9 @@ class MatchesController < ApplicationController
 	def destroy
 		match = Match.find(params[:id])
 
+		activity = Activity.new
+		activity.challenge_canceled match
+		activity.save
 		PlayerMailer.challenge_canceled_email(match).deliver
 		match.destroy
 

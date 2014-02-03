@@ -28,7 +28,7 @@
         <% end %>
   		</div>
   		<div class="col-sm-7">
-		  	<%= render partial: "/matches/history", locals: { matches: @match_history, current_player_id: @player.id } %>
+		  	<%= render partial: "/activity/player", locals: { activity: @player_activity, current_player_id: @player.id } %>
 		  </div>
 		</div>
   </div>

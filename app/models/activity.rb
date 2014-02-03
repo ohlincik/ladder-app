@@ -18,7 +18,7 @@ class Activity < ActiveRecord::Base
   end
 
   def challenge_canceled match
-    self.activity_date = Date.now
+    self.activity_date = Date.current
     self.activity_type = "Challenge Canceled"
     self.challenger_id = match.challenger_id
     self.challenger_first_name = match.challenger.first_name

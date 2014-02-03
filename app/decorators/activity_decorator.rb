@@ -53,4 +53,36 @@ class ActivityDecorator < Draper::Decorator
     score
   end
 
+  def display_match_rank current_player_id
+    if challenger_id == current_player_id
+      if challenger_end_rank.blank? or challenger_end_rank == 0
+        "&mdash;".html_safe
+      else
+        challenger_end_rank
+      end
+    else
+      if challenged_player_end_rank.blank? or challenged_player_end_rank == 0
+        "&mdash;".html_safe
+       else
+        challenged_player_end_rank
+      end
+    end
+  end
+
+  def display_challenge_rank current_player_id
+    if challenger_id == current_player_id
+      if challenger_start_rank.blank? or challenger_start_rank == 0
+        "&mdash;".html_safe
+      else
+        challenger_start_rank
+      end
+    else
+      if challenged_player_start_rank.blank? or challenged_player_start_rank == 0
+        "&mdash;".html_safe
+      else
+        challenged_player_start_rank
+      end
+    end
+  end
+
 end
