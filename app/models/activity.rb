@@ -1,5 +1,8 @@
 class Activity < ActiveRecord::Base
 
+  default_scope { order(activity_date: :desc) }
+  scope :player_activity, ->(player_id) { where("challenger_id = ? OR challenged_player_id = ?", player_id, player_id) }
+
   def challenger_victorious?
     challenger_id == winner
   end

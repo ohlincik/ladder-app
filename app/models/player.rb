@@ -119,4 +119,27 @@ class Player < ActiveRecord::Base
     challenged_player.save
   end
 
+  def remove
+    # check if challenge pending, if yes, cancel
+    if challenge_issued?
+      challenges.last.cancel
+    end
+    if challenge_match_pending?
+      challenge_matches.last.cancel
+    end
+    # delete past activity
+    player_activity = Activity.player_activity(self)
+    player_activity.delete_all
+    # destroy the player
+    self.destroy
+    # adjust ranks for remaining players
+    unless new_player?
+      higher_ranked_players = Player.where("rank > ?", self.rank)
+      higher_ranked_players.each do |player|
+        player.rank -= 1
+        player.save
+      end
+    end
+  end
+
 end
