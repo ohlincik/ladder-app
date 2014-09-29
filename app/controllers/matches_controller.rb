@@ -32,6 +32,12 @@ class MatchesController < ApplicationController
   def edit
     @match = Match.find(params[:id])
     @match.played_at = Date.current.to_s(:db)
+    @match.challenger_game1 = 15
+    @match.challenged_player_game1 = 15
+    @match.challenger_game2 = 15
+    @match.challenged_player_game2 = 15
+    @match.challenger_game3 = 15
+    @match.challenged_player_game3 = 15
   end
 
   def update
