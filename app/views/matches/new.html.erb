@@ -19,7 +19,7 @@
 			<br>
 			<% if current_player.scheduling_info.blank? %>
 				<div class="alert alert-info">
-					<h5><span class="glyphicon glyphicon-info-sign"></span> NOTE</h5>
+					<h5><i class="fa fa-info-circle"></i> NOTE</h5>
 					<p>You can automatially include <strong>the best times to schedule a match with you</strong> in your challenge emails.</p>
 					<p class="text-right"><%= link_to 'Set it up now', edit_player_registration_path(current_player) %> &raquo;</p>
 				</div>

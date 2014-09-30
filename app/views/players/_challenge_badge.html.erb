@@ -34,7 +34,7 @@
 		&bull;
 		<%= display_phone(current_challenge.contact_phone) %>
 	</p>
-	<p><a class="btn btn-link" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><span class="glyphicon glyphicon-calendar"></span> Best times to schedule a match</a></p>
+	<p><a class="btn btn-link" href="#" id="contact-info" rel="popover" data-original-title="<%= current_challenge.player_first_name %>'s Contact Info"><i class="fa fa-calendar"></i> Best times to schedule a match</a></p>
 	<hr>
 	<p class="text-center"><%= link_to "Submit Score", edit_match_path(current_challenge.id), :class =>'btn btn-primary' %></p>
 	<% if show_cancel_link %>

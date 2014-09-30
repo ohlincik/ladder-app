@@ -52,13 +52,13 @@
 							<td>&nbsp;</td>
 							<td>You</td>
 						<% elsif p.challenge_issued? %>
-							<td><span class="glyphicon glyphicon-arrow-right text-success"></span></p>
+							<td><i class="fa fa-arrow-right text-success"></i></p>
 							<td>
 								<%= p.last_challenge.challenged_player.name %>
 								<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
 							</td>
 						<% elsif p.challenge_match_pending? %>
-							<td><span class="glyphicon glyphicon-arrow-left text-danger"></span></td>
+							<td><i class="fa fa-arrow-left text-danger"></i></td>
 							<td>
 								<%= p.last_challenge.challenger.name %>
 								<%= render partial: "challenge_date", object: p.last_challenge, as: 'challenge' %>
